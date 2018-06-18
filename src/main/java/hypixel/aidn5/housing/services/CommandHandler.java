@@ -1,10 +1,10 @@
-package hypixel.aidn5.housing.handlers;
+package hypixel.aidn5.housing.services;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import hypixel.aidn5.housing.config.common;
-import hypixel.aidn5.housing.config.consts;
+import hypixel.aidn5.housing.Common;
+import hypixel.aidn5.housing.Config;
 
 public class CommandHandler {
 	private Thread thread1;
@@ -34,7 +34,7 @@ public class CommandHandler {
 		try {
 			queue1.put(message);
 		} catch (InterruptedException e) {
-			if (consts.debug_mode) e.printStackTrace();
+			if (Config.debug_mode) e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -44,7 +44,7 @@ public class CommandHandler {
 		try {
 			queue2.put(message);
 		} catch (InterruptedException e) {
-			if (consts.debug_mode) e.printStackTrace();
+			if (Config.debug_mode) e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -61,8 +61,8 @@ public class CommandHandler {
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(consts.cmd_timerS);
-					common.sendCommand(queue.take());
+					Thread.sleep(Config.cmd_timerS);
+					Common.sendCommand(queue.take());
 				} catch (Exception ignore) {}
 			}
 
@@ -81,8 +81,8 @@ public class CommandHandler {
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(consts.cmd_timerF);
-					common.sendCommand(queue.take());
+					Thread.sleep(Config.cmd_timerF);
+					Common.sendCommand(queue.take());
 				} catch (Exception ignore) {}
 			}
 

@@ -1,10 +1,10 @@
-package hypixel.aidn5.housing.commands;
+package hypixel.aidn5.housing.mods.hsaver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hypixel.aidn5.housing.config.common;
-import hypixel.aidn5.housing.config.consts;
+import hypixel.aidn5.housing.Common;
+import hypixel.aidn5.housing.Config;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -14,16 +14,21 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-public class HSaver extends CommandBase implements ICommand {
+public class Command extends CommandBase implements ICommand {
 	private String primary = EnumChatFormatting.AQUA + "";
 	private String neutral = EnumChatFormatting.GRAY + "";
 	private String secondary = EnumChatFormatting.YELLOW + "";
+	private String[] commands_name;
+
+	public Command(String[] commands_name_) {
+		commands_name = commands_name_;
+	}
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		try {
 			// Warn the user about saving data
-			if (!common.settings.DIR_CHECKED) showMessage(consts.warning_settings, sender);
+			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
 
 			// length will get requested many time in the code; better performence
 			int length = args.length;
@@ -38,16 +43,16 @@ public class HSaver extends CommandBase implements ICommand {
 			}
 
 			if (args[0].equals("on")) {
-				common.settings.set("hsaver-toggled", "True");
+				Main.settings.set("hsaver-toggled", "True");
 				showMessage(getCommandName() + " Toggled one", sender);
 				return;
 			} else if (args[0].equals("off")) {
-				common.settings.set("hsaver-toggled", "False");
+				Main.settings.set("hsaver-toggled", "False");
 				showMessage(getCommandName() + " Toggled off", sender);
 				return;
 
 			} else if (args[0].equals("resetall")) {
-				if (common.settings.set("hsaver-toggled", "False") && common.housingSaver.clear()) {
+				if (Main.settings.set("hsaver-toggled", "False") && Main.settings.clear()) {
 					showMessage("Clear all AND reset settings for " + getCommandName(), sender);
 					return;
 				}
@@ -55,7 +60,7 @@ public class HSaver extends CommandBase implements ICommand {
 				return;
 			} else if (args[0].equals("load")) {
 				String username = args[1];// On Excpetion showSyntaxError() will get trigered
-				String data = common.housingSaver.get(username, "");
+				String data = Main.settings.get(username, "");
 				if (data == null) {
 					showError("Failed loading save for user " + username + " :(", sender);
 					return;
@@ -81,22 +86,21 @@ public class HSaver extends CommandBase implements ICommand {
 	// Manage commands context
 	@Override
 	public String getCommandName() {
-		return "/" + this.getClass().getSimpleName().toLowerCase();
+		return "/" + commands_name[0];
 	}
 
 	@Override
 	public List<String> getCommandAliases() {
 		List<String> aliases = new ArrayList();
-		aliases.add("hload");
-		aliases.add("hl");
-		aliases.add("sl");
-
+		for (String command : commands_name) {
+			aliases.add(command);
+		}
 		return aliases;
 	}
 
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		List<EntityPlayer> players = common.mc.theWorld.playerEntities;
+		List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
 		List<String> playerNames = new ArrayList();
 
 		for (EntityPlayer player : players) {
@@ -119,10 +123,8 @@ public class HSaver extends CommandBase implements ICommand {
 	public String getCommandUsage(ICommandSender sender) {
 		String CMD_NAME = "/" + getCommandName() + " ";
 		showMessage(neutral + "--------------------", sender);
-		showMessage(
-				secondary + consts.MOD_NAME
-						+ (Boolean.valueOf(common.settings.get("hsaver-toggled", "False")) ? " (Toggled)" : ""),
-				sender);
+		showMessage(secondary + Config.MOD_NAME
+				+ (Boolean.valueOf(Main.settings.get("hsaver-toggled", "False")) ? " (Toggled)" : ""), sender);
 		showMessage(primary + CMD_NAME + "<off,on>", sender);
 		showMessage(primary + CMD_NAME + "resetAll", sender);
 		showMessage(primary + CMD_NAME + "load <username>", sender);

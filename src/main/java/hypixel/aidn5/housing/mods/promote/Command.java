@@ -1,7 +1,10 @@
-package hypixel.aidn5.housing.commands;
+package hypixel.aidn5.housing.mods.promote;
 
-import hypixel.aidn5.housing.config.common;
-import hypixel.aidn5.housing.config.consts;
+import java.util.ArrayList;
+import java.util.List;
+
+import hypixel.aidn5.housing.Common;
+import hypixel.aidn5.housing.Config;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -9,17 +12,22 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-public class Promote extends CommandBase implements ICommand {
+public class Command extends CommandBase implements ICommand {
 	private String primary = EnumChatFormatting.AQUA + "";
 	private String neutral = EnumChatFormatting.GRAY + "";
 	private String secondary = EnumChatFormatting.YELLOW + "";
+	private String[] commands_name;
+
+	public Command(String[] commands_name_) {
+		commands_name = commands_name_;
+	}
 
 	// Manage... the process...
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		try {
 			// Warn the user about saving data
-			if (!common.settings.DIR_CHECKED) showMessage(consts.warning_settings, sender);
+			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
 
 			// length will get requested many time in the code; better performence
 			int length = args.length;
@@ -35,11 +43,11 @@ public class Promote extends CommandBase implements ICommand {
 
 			if (args[0].equals("on")) {
 				showMessage(primary + "/" + getCommandName() + " toggled on", sender);
-				common.settings.set("toggled", "ON");
+				Main.settings.set("toggled", "ON");
 				return;
 			} else if (args[0].equals("off")) {
 				showMessage(primary + "/" + getCommandName() + " toggled off", sender);
-				common.settings.set("toggled", "OFF");
+				Main.settings.set("toggled", "OFF");
 				return;
 
 			} else if (args[0].equals("settings")) {
@@ -47,11 +55,11 @@ public class Promote extends CommandBase implements ICommand {
 				return;
 			} else if (args[0].equals("debug")) {
 				if (args[1].equals("on")) {
-					common.settings.set("debug_mode", "True");
-					consts.debug_mode = true;
+					Main.settings.set("debug_mode", "True");
+					Config.debug_mode = true;
 				} else {
-					common.settings.set("debug_mode", "False");
-					consts.debug_mode = false;
+					Main.settings.set("debug_mode", "False");
+					Config.debug_mode = false;
 				}
 				return;
 
@@ -89,11 +97,11 @@ public class Promote extends CommandBase implements ICommand {
 			return;
 		}
 
-		if (common.settings.set(name, settings_value)) {
+		if (Main.settings.set(name, settings_value)) {
 			return;
 		}
 
-		showError(consts.ERERR_SET, sender);
+		showError(Common.language.get("ERERR_SET", ""), sender);
 		return;
 	}
 
@@ -103,13 +111,13 @@ public class Promote extends CommandBase implements ICommand {
 
 			if (args[1].equals("ranksaver")) {
 				if (length == 2) {
-					showMessage("Rank Saver: " + common.settings.get("ap-rank_saver", "true"), sender);
+					showMessage("Rank Saver: " + Main.settings.get("ap-rank_saver", "true"), sender);
 					return;
 				} else if (args[2].equals("yes") || args[2].equals("y") || args[2].equals("on")) {
-					common.settings.get("ap-rank_saver", "true");
+					Main.settings.get("ap-rank_saver", "true");
 					return;
 				} else if (args[2].equals("no") || args[2].equals("n") || args[2].equals("off")) {
-					common.settings.get("ap-rank_saver", "false");
+					Main.settings.get("ap-rank_saver", "false");
 					return;
 				}
 			}
@@ -119,21 +127,30 @@ public class Promote extends CommandBase implements ICommand {
 
 	private void viewStatus(ICommandSender sender) {
 		showMessage(primary + "AutoPromote: ", sender);
-		showMessage(primary + "Toggled: " + secondary + common.settings.set("toggled", "OFF"), sender);
-		showMessage(primary + "All: " + secondary + common.settings.get("ap-jn", "OFF"), sender);
-		showMessage(primary + "Friends: " + secondary + common.settings.get("ap-fr", "OFF"), sender);
-		showMessage(primary + "Parkour: " + secondary + common.settings.get("ap-pk", "OFF"), sender);
-		if (consts.debug_mode) {
-			showMessage(primary + "onForce: " + secondary + String.valueOf(common.onForce), sender);
-			showMessage(primary + "onHypixel: " + secondary + String.valueOf(common.onHypixel), sender);
-			showMessage(primary + "onHousing: " + secondary + String.valueOf(common.onHousing), sender);
+		showMessage(primary + "Toggled: " + secondary + Main.settings.set("toggled", "OFF"), sender);
+		showMessage(primary + "All: " + secondary + Main.settings.get("ap-jn", "OFF"), sender);
+		showMessage(primary + "Friends: " + secondary + Main.settings.get("ap-fr", "OFF"), sender);
+		showMessage(primary + "Parkour: " + secondary + Main.settings.get("ap-pk", "OFF"), sender);
+		if (Config.debug_mode) {
+			showMessage(primary + "onForce: " + secondary + String.valueOf(Common.onForce), sender);
+			showMessage(primary + "onHypixel: " + secondary + String.valueOf(Common.onHypixel), sender);
+			showMessage(primary + "onHousing: " + secondary + String.valueOf(Common.onHousing), sender);
 		}
 	}
 
 	// Manage commands context
 	@Override
 	public String getCommandName() {
-		return "/" + this.getClass().getSimpleName().toLowerCase();
+		return "/" + commands_name[0];
+	}
+
+	@Override
+	public List<String> getCommandAliases() {
+		List<String> aliases = new ArrayList();
+		for (String command : commands_name) {
+			aliases.add(command);
+		}
+		return aliases;
 	}
 
 	@Override
@@ -149,7 +166,7 @@ public class Promote extends CommandBase implements ICommand {
 	public String getCommandUsage(ICommandSender sender) {
 		String CMD_NAME = "/" + getCommandName() + " ";
 		showMessage(neutral + "--------------------", sender);
-		showMessage(secondary + consts.MOD_NAME, sender);
+		showMessage(secondary + Config.MOD_NAME, sender);
 		showMessage(primary + CMD_NAME + "<off,on>", sender);
 		showMessage(primary + CMD_NAME + "status", sender);
 		showMessage(primary + CMD_NAME + "All(A) <off,res,co>", sender);
