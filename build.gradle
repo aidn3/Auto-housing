@@ -20,9 +20,9 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "0.2"
+version = "0.3"
 group= "hypixel.aidn5.housing" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Auto housing.1.0-beta"
+archivesBaseName = "Auto housing-beta"
 
 minecraft {
     version = "1.8.9-11.15.1.1722"
