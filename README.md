@@ -3,7 +3,7 @@ automating [Owner] and [Co-Owner] jobs from giving [Rank] after completing a par
   
 ### Mods  
 - Auto-Promote @aidn5  
-- HousingSaver (Not tested) @bugfroggy  
+- HousingSaver @bugfroggy  
 - Anti-Griefer (In progress) @aidn5  
  
 #### Auto-Promote @aidn5  
@@ -19,13 +19,6 @@ It works by using regex to read the chat and detect it
 It prevent people from griefing the plot. It needs owner permission to work(NOT Co-Owner).  
 This project still in progress. All I can say is:  
 It needs a LOT of MATHs, knowledge of 3D dimension, multiple threads and advanced java classes. Not even sure if I can do it in minecraft version 1.8.9.  
- 
- 
-### TODO LIST  
-- Re-check the spelling of words  
-- Adding an option to promote friends on joining  
-- Adding feature: updates checker  
-- Adding Anti-Griefer feature  
   
 #### Implemented Features  
 - @bugfroggy https://github.com/bugfroggy/HousingSaver  
