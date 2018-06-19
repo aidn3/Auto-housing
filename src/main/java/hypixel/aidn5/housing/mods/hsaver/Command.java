@@ -1,10 +1,12 @@
 package hypixel.aidn5.housing.mods.hsaver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.Config;
+import hypixel.aidn5.housing.utiles.Utiles;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -29,9 +31,10 @@ public class Command extends CommandBase implements ICommand {
 		try {
 			// Warn the user about saving data
 			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
-
+			Utiles.debug(args[1]);
 			// length will get requested many time in the code; better performence
 			int length = args.length;
+			String[] orginArgs = args.clone();
 
 			if (length == 0) {// No arguments; show usage
 				getCommandUsage(sender);
@@ -58,9 +61,18 @@ public class Command extends CommandBase implements ICommand {
 				}
 				showError("Cannot clear settings and reset all data! :(", sender);
 				return;
+
 			} else if (args[0].equals("load")) {
-				String username = args[1];// On Excpetion showSyntaxError() will get trigered
-				String data = Main.settings.get(username, "");
+				String username = orginArgs[1];// On Excpetion, showSyntaxError() will get trigered
+				Utiles.debug("Hsaver: load info for '" + username + "'...");
+				EntityPlayer player = Common.mc.theWorld.getPlayerEntityByName(username);
+				if (player == null) {
+					showError("Are you sure, the player is around you?", sender);
+					return;
+				}
+				String UUID = EntityPlayer.getUUID(player.getGameProfile()) + "";
+				String data = Main.settings.get(UUID, "");
+
 				if (data == null) {
 					showError("Failed loading save for user " + username + " :(", sender);
 					return;
@@ -69,7 +81,9 @@ public class Command extends CommandBase implements ICommand {
 					return;
 				}
 				try {
-					String[] coord = data.split("|");
+					Utiles.debug(data);
+					String[] coord = data.split("!");
+					Utiles.debug(Arrays.toString(coord));
 					showMessage(username + "'s Save: " + coord[0] + " / " + coord[1] + " / " + coord[2], sender);
 				} catch (Exception e) {
 					showError("Unable to fetch the data", sender);
@@ -100,14 +114,20 @@ public class Command extends CommandBase implements ICommand {
 
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
-		List<String> playerNames = new ArrayList();
+		int length = args.length;
+		List<String> list = new ArrayList();
 
-		for (EntityPlayer player : players) {
-			playerNames.add(player.getName());
+		if (length == 1) {
+			list.add("load");
+		} else if (length == 2 && args[0].equals("load")) {
+			List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
+
+			for (EntityPlayer player : players) {
+				list.add(player.getName());
+			}
 		}
 
-		return playerNames;
+		return list;
 	}
 
 	@Override

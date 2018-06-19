@@ -8,31 +8,26 @@ import hypixel.aidn5.housing.Config;
 
 public class CommandHandler {
 	private Thread thread1;
-	private Thread thread2;
 
 	private Runnable runnable1;
-	private Runnable runnable2;
 
-	private BlockingQueue<String> queue1;
-	private BlockingQueue<String> queue2;
+	private BlockingQueue<String> queueF;
+	private BlockingQueue<String> queueS;
 
 	public CommandHandler() {
-		queue1 = new ArrayBlockingQueue(10);
-		queue2 = new ArrayBlockingQueue(10);
+		queueF = new ArrayBlockingQueue(10);
+		queueS = new ArrayBlockingQueue(10);
 
-		runnable1 = new commanderSlow(queue1);
-		runnable2 = new commanderFast(queue2);
+		runnable1 = new commanderSlow(queueF, queueS);
 
 		thread1 = new Thread(runnable1);
-		thread2 = new Thread(runnable2);
 
 		thread1.start();
-		thread2.start();
 	}
 
 	public boolean sendSlow(String message) {
 		try {
-			queue1.put(message);
+			queueS.put(message);
 		} catch (InterruptedException e) {
 			if (Config.debug_mode) e.printStackTrace();
 			return false;
@@ -42,7 +37,7 @@ public class CommandHandler {
 
 	public boolean sendFast(String message) {
 		try {
-			queue2.put(message);
+			queueF.put(message);
 		} catch (InterruptedException e) {
 			if (Config.debug_mode) e.printStackTrace();
 			return false;
@@ -51,38 +46,29 @@ public class CommandHandler {
 	}
 
 	private class commanderSlow implements Runnable {
-		private BlockingQueue<String> queue;
+		private BlockingQueue<String> queueF;
+		private BlockingQueue<String> queueS;
 
-		public commanderSlow(BlockingQueue<String> q) {
-			this.queue = q;
+		public commanderSlow(BlockingQueue<String> fast, BlockingQueue<String> slow) {
+			this.queueF = fast;
+			this.queueF = fast;
 		}
 
 		@Override
 		public void run() {
 			while (true) {
 				try {
-					Thread.sleep(Config.cmd_timerS);
-					Common.sendCommand(queue.take());
-				} catch (Exception ignore) {}
-			}
-
-		}
-
-	}
-
-	private class commanderFast implements Runnable {
-		private BlockingQueue<String> queue;
-
-		public commanderFast(BlockingQueue<String> q) {
-			this.queue = q;
-		}
-
-		@Override
-		public void run() {
-			while (true) {
-				try {
-					Thread.sleep(Config.cmd_timerF);
-					Common.sendCommand(queue.take());
+					if (queueF.size() == 0) {
+						if (queueS.size() != 0) {
+							Common.sendCommand(queueS.take());
+							Thread.sleep(Config.cmd_timerS);
+						} else {
+							Thread.sleep(Config.refresh_Speed);
+						}
+					} else {
+						Common.sendCommand(queueF.take());
+						Thread.sleep(Config.cmd_timerF);
+					}
 				} catch (Exception ignore) {}
 			}
 

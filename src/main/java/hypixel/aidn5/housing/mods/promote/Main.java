@@ -27,8 +27,12 @@ public class Main {
 	static public void onChat(ClientChatReceivedEvent event) {
 		if (!started) return;
 		if (!(event.type == 0)) return;
-		if (reciever == null) return;
 
 		reciever.onChat(event.message.getUnformattedText());
+	}
+
+	static public void onChat(String message) {
+		if (!started) return;
+		reciever.onChat(message);
 	}
 }

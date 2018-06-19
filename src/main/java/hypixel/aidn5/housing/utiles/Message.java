@@ -13,7 +13,24 @@ public class Message {
 	// View message to the player
 	static public void showMessage(String message) {
 		Utiles.debug("Show message: " + message);
+	}
 
-		// Minecraft.getMinecraft().thePlayer
+	static public String getUsername(String message) {
+		String[] words = message.split("\\s+");
+		String name = words[0];
+		if (!name.contains(":")) name = words[1];
+		if (!name.contains(":")) name = words[2];
+		if (!name.contains(":")) name = words[3];
+		if (!name.contains(":")) name = words[4];
+		if (!name.contains(":")) name = words[5];
+
+		name = name.replace(":", "");
+
+		if (name.contains("§")) name = name.substring(0, name.length() - 2);
+		if (name.contains("§")) name = name.substring(0, name.length() - 2);
+		if (name.contains("§")) name = name.substring(0, name.length() - 2);
+		if (name.contains("§")) name = name.substring(0, name.length() - 2);
+
+		return name;
 	}
 }

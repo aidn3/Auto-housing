@@ -7,7 +7,7 @@ import java.net.URLConnection;
 
 public class InternetHandler {
 
-	public void getString(String url, EventListener callback) {
+	public void getString(final String url, final EventListener callback) {
 		Runnable runnable = new Runnable() {
 
 			@Override

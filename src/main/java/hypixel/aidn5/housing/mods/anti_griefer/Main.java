@@ -1,12 +1,13 @@
-package hypixel.aidn5.housing.mods.hsaver;
+package hypixel.aidn5.housing.mods.anti_griefer;
 
+import hypixel.aidn5.housing.services.Manager;
 import hypixel.aidn5.housing.services.SettingsHandler;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 
 public class Main {
 	static SettingsHandler settings;
-	static Reciever reciever;
+	static Manager manager;
 	static boolean started = false;
 
 	static public void start() {
@@ -16,10 +17,11 @@ public class Main {
 	static void prepare() {
 		if (started) return;
 
-		reciever = new Reciever();
-		settings = new SettingsHandler("housingSaver");
-		String[] commands = new String[] { "hsaver", "hs" };
-		ClientCommandHandler.instance.registerCommand(new Command(commands));
+		manager = new Manager();
+		settings = new SettingsHandler("promote");
+
+		String[] commands = new String[] { "hanti-griefer", "hg" };
+		ClientCommandHandler.instance.registerCommand(new Command());
 
 		started = true;
 	}
@@ -28,11 +30,11 @@ public class Main {
 		if (!started) return;
 		if (!(event.type == 0)) return;
 
-		reciever.onChat(event.message.getUnformattedText());
+		manager.onChat(event.message.getUnformattedText());
 	}
 
 	static public void onChat(String message) {
 		if (!started) return;
-		reciever.onChat(message);
+		manager.onChat(message);
 	}
 }

@@ -89,7 +89,7 @@ public class Reciever {
 			if (!ap_jn.equals("OFF") && message.contains("entered the world")) {
 				reason = "JoinTheWorld";
 				level = ap_jn;
-			} else if (!ap_jn.equals("OFF") && message.contains("completed the parkour in")) {
+			} else if (!ap_pk.equals("OFF") && message.contains("completed the parkour in")) {
 				reason = "FinishedTheParkour";
 				level = ap_pk;
 			}

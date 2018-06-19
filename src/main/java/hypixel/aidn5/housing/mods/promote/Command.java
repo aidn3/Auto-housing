@@ -44,10 +44,12 @@ public class Command extends CommandBase implements ICommand {
 			if (args[0].equals("on")) {
 				showMessage(primary + "/" + getCommandName() + " toggled on", sender);
 				Main.settings.set("toggled", "ON");
+				if (length > 1 && args[1].equals("force")) Common.onForce = true;
 				return;
 			} else if (args[0].equals("off")) {
 				showMessage(primary + "/" + getCommandName() + " toggled off", sender);
 				Main.settings.set("toggled", "OFF");
+				Common.onForce = false;
 				return;
 
 			} else if (args[0].equals("settings")) {
