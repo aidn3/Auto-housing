@@ -1,7 +1,6 @@
 package hypixel.aidn5.housing.mods.hsaver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import hypixel.aidn5.housing.Common;
@@ -31,7 +30,7 @@ public class Command extends CommandBase implements ICommand {
 		try {
 			// Warn the user about saving data
 			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
-			Utiles.debug(args[1]);
+
 			// length will get requested many time in the code; better performence
 			int length = args.length;
 			String[] orginArgs = args.clone();
@@ -55,11 +54,12 @@ public class Command extends CommandBase implements ICommand {
 				return;
 
 			} else if (args[0].equals("resetall")) {
-				if (Main.settings.set("hsaver-toggled", "False") && Main.settings.clear()) {
-					showMessage("Clear all AND reset settings for " + getCommandName(), sender);
+				Main.settings.clear();
+				showMessage(Common.language.get("RESET_SET", "") + getCommandName(), sender);
+				if (!Main.settings.SaveUserSettings()) {
+					showError(Common.language.get("SET_SAVE_ERR", ""), sender);
 					return;
 				}
-				showError("Cannot clear settings and reset all data! :(", sender);
 				return;
 
 			} else if (args[0].equals("load")) {
@@ -81,9 +81,7 @@ public class Command extends CommandBase implements ICommand {
 					return;
 				}
 				try {
-					Utiles.debug(data);
 					String[] coord = data.split("!");
-					Utiles.debug(Arrays.toString(coord));
 					showMessage(username + "'s Save: " + coord[0] + " / " + coord[1] + " / " + coord[2], sender);
 				} catch (Exception e) {
 					showError("Unable to fetch the data", sender);

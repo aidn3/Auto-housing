@@ -23,6 +23,7 @@ public class Reciever {
 				return;
 			}
 		}
+		Utiles.debug("Hsaver: checking it...");
 		if (Message.LegitMsg(message)) {
 
 		} else {

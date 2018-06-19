@@ -107,6 +107,8 @@ public class PlayerListener {
 			try {
 				while (true) {
 					if (!Start) return;
+					if (needRestart) return;
+					Thread.sleep(1000);
 
 					EntityPlayer entityPlayer = Common.mc.theWorld.getPlayerEntityByName(playerName);
 					settings.put("last_pos", entityPlayer.posX + "|" + entityPlayer.posY + "|" + entityPlayer.posZ);
@@ -118,8 +120,6 @@ public class PlayerListener {
 					} else {
 						settings.put("is_moving", "0");
 					}
-
-					Thread.sleep(1000);
 				}
 			} catch (Exception e) {
 				ErrorNr++;

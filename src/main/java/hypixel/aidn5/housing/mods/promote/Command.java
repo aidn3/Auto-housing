@@ -9,6 +9,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -138,6 +139,31 @@ public class Command extends CommandBase implements ICommand {
 			showMessage(primary + "onHypixel: " + secondary + String.valueOf(Common.onHypixel), sender);
 			showMessage(primary + "onHousing: " + secondary + String.valueOf(Common.onHousing), sender);
 		}
+	}
+
+	@Override
+	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+		int length = args.length;
+		for (int i = 0; i < length; i++) {
+			args[i] = args[i].toLowerCase(); // make it "unvirsal"
+		}
+		List<String> list = new ArrayList();
+
+		if (length == 1) {
+			list.add("status");
+			list.add("all");
+			list.add("friends");
+			list.add("parkour");
+		} else if (length == 2) {
+			if (args[0].equals("all") || args[0].equals("friends") || args[0].equals("parkour")) {
+				list.add("off");
+				list.add("guest");
+				list.add("res");
+				list.add("co");
+			}
+		}
+
+		return list;
 	}
 
 	// Manage commands context

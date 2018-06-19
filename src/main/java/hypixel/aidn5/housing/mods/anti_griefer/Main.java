@@ -1,11 +1,11 @@
 package hypixel.aidn5.housing.mods.anti_griefer;
 
-import hypixel.aidn5.housing.services.Manager;
 import hypixel.aidn5.housing.services.SettingsHandler;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 
 public class Main {
+	static String MOD_NAME = "Anti-Griefer";
 	static SettingsHandler settings;
 	static Manager manager;
 	static boolean started = false;
@@ -20,8 +20,8 @@ public class Main {
 		manager = new Manager();
 		settings = new SettingsHandler("promote");
 
-		String[] commands = new String[] { "hanti-griefer", "hg" };
-		ClientCommandHandler.instance.registerCommand(new Command());
+		String[] commands = new String[] { "hgriefer", "hg" };
+		ClientCommandHandler.instance.registerCommand(new Command(commands));
 
 		started = true;
 	}

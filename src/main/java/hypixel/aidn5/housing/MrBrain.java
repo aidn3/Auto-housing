@@ -24,7 +24,7 @@ public class MrBrain {
 
 		hypixel.aidn5.housing.mods.promote.Main.start();
 		hypixel.aidn5.housing.mods.hsaver.Main.start();
-		// hypixel.aidn5.housing.mods.anti_griefer.Main.start();
+		hypixel.aidn5.housing.mods.anti_griefer.Main.start();
 		Common.started = true;
 
 		// Full test for commands
@@ -44,6 +44,13 @@ public class MrBrain {
 		// Hsaver : save, Load;
 		getMessage("From [VIP] " + Common.master + ": !save");
 
+		// Anti-Griefer: GriefOnSay
+		getMessage("Ema19226: griefer");
+		getMessage("[Co-Owner] aidn3: there IS GRIEFER here");
+		getMessage("[RES] [VIP] SrryDude: STOP GRIeFing plz");
+		getMessage("[Owner] someone: just WHY are YOU GRIEFING");
+		getMessage("Ema19226: don't trust UserName he is a GRIEFER!");
+
 		// No use...yet
 		getMessage("§9Party > §7aidn5§f: ouch");
 		getMessage("Ema19226: ty");
@@ -60,7 +67,7 @@ public class MrBrain {
 		// Common.manager.onChat(message);
 		hypixel.aidn5.housing.mods.promote.Main.onChat(message);
 		hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
-		// hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
 	}
 
 	public void getMessage(String message) {
@@ -70,7 +77,7 @@ public class MrBrain {
 		Common.manager.onChat(message);
 		hypixel.aidn5.housing.mods.promote.Main.onChat(message);
 		hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
-		// hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
 	}
 
 }

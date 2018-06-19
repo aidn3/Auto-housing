@@ -12,6 +12,7 @@ public class Reciever {
 			Utiles.debug("AutoPromoteMessage: No onForce; Exit");
 			return;
 		}
+		Utiles.debug("seeing if any promote available");
 		if (Message.LegitMsg(message)) {
 			fromServer(message);
 		} else {
@@ -31,40 +32,22 @@ public class Reciever {
 	// For things from the player/chat
 	public boolean fromPlayer(String message) {
 		try {
-			String[] words = message.split("\\s+");
-			String ap_fw = Main.settings.get("ap-fw", "OFF");
-
-			String reason = null;
-			String name = words[0];
-			if (!name.contains(":")) name = words[1];
-			if (!name.contains(":")) name = words[2];
-			if (!name.contains(":")) name = words[3];
-			if (!name.contains(":")) name = words[4];
-			if (!name.contains(":")) name = words[5];
-			// It means the player has rank/or say it in private chat
-			name = name.replace(":", "");
-
-			if (name.contains("§")) name = name.substring(0, name.length() - 2);
-			if (name.contains("§")) name = name.substring(0, name.length() - 2);
-			if (name.contains("§")) name = name.substring(0, name.length() - 2);
-			if (name.contains("§")) name = name.substring(0, name.length() - 2);
-
-			String level = null;
-
-			if (!ap_fw.equals("OFF") && message.contains(Main.settings.get("ap-fw-word", "PromoteME!"))) {
-				reason = "WordSaid";
-				level = ap_fw;
-			}
-
-			Utiles.debug("seeing if any promote available");
-			if (reason != null && level != null) {
-				Message.showMessage("Promoting '" + name + "' to " + level + " for " + reason);
-				for (String cmd : CmdGenAutoPromote(name, level)) {
-					Utiles.debug("EXECUTING: " + cmd);
-					Common.commandHandler.sendSlow(cmd);
-				}
-				return true;
-			}
+			/*
+			 * String ap_fw = Main.settings.get("ap-fw", "OFF");
+			 * 
+			 * String reason = null; String name = Message.getUsername(message);
+			 * 
+			 * String level = null;
+			 * 
+			 * if (!ap_fw.equals("OFF") && message.contains(Main.settings.get("ap-fw-word",
+			 * "PromoteME!"))) { reason = "WordSaid"; level = ap_fw; }
+			 * 
+			 * Utiles.debug("seeing if any promote available"); if (reason != null && level
+			 * != null) { Message.showMessage("Promoting '" + name + "' to " + level +
+			 * " for " + reason); for (String cmd : CmdGenAutoPromote(name, level)) {
+			 * Utiles.debug("EXECUTING: " + cmd); Common.commandHandler.sendSlow(cmd); }
+			 * return true; }
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 			Utiles.debug("fromPlayer->Message crashed with an exception!");
@@ -94,11 +77,9 @@ public class Reciever {
 				level = ap_pk;
 			}
 
-			Utiles.debug("seeing if any promote available");
 			if (reason != null && level != null) {
 				Message.showMessage("Promoting '" + name + "' to " + level + " for " + reason);
 				for (String cmd : CmdGenAutoPromote(name, level)) {
-					Utiles.debug("EXECUTING: " + cmd);
 					Common.commandHandler.sendSlow(cmd);
 				}
 				return true;

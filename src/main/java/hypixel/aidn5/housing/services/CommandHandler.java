@@ -13,16 +13,28 @@ public class CommandHandler {
 
 	private BlockingQueue<String> queueF;
 	private BlockingQueue<String> queueS;
+	private BlockingQueue<String> queueN;
 
 	public CommandHandler() {
 		queueF = new ArrayBlockingQueue(10);
 		queueS = new ArrayBlockingQueue(10);
+		queueN = new ArrayBlockingQueue(10);
 
-		runnable1 = new commanderSlow(queueF, queueS);
+		runnable1 = new commanderSlow(queueF, queueS, queueN);
 
 		thread1 = new Thread(runnable1);
 
 		thread1.start();
+	}
+
+	public boolean sendNow(String message) {
+		try {
+			queueN.put(message);
+		} catch (InterruptedException e) {
+			if (Config.debug_mode) e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public boolean sendSlow(String message) {
@@ -48,22 +60,30 @@ public class CommandHandler {
 	private class commanderSlow implements Runnable {
 		private BlockingQueue<String> queueF;
 		private BlockingQueue<String> queueS;
+		private BlockingQueue<String> queueN;
 
-		public commanderSlow(BlockingQueue<String> fast, BlockingQueue<String> slow) {
+		public commanderSlow(BlockingQueue<String> fast, BlockingQueue<String> slow, BlockingQueue<String> now) {
 			this.queueF = fast;
-			this.queueF = fast;
+			this.queueS = slow;
+			this.queueN = now;
 		}
 
 		@Override
 		public void run() {
 			while (true) {
 				try {
-					if (queueF.size() == 0) {
+					if (queueN.size() != 0) {
+						Common.sendCommand(queueN.take());
+						Thread.sleep(Config.refresh_Speed);
+
+					} else if (queueF.size() == 0) {
 						if (queueS.size() != 0) {
 							Common.sendCommand(queueS.take());
 							Thread.sleep(Config.cmd_timerS);
+
 						} else {
 							Thread.sleep(Config.refresh_Speed);
+
 						}
 					} else {
 						Common.sendCommand(queueF.take());

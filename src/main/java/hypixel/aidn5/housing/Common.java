@@ -31,4 +31,13 @@ public class Common {
 		Utiles.debug("EXECUTING: " + command);
 		Common.mc.thePlayer.sendChatMessage(command);
 	}
+
+	public static boolean checkHousing() {
+		if (!Common.onForce) {
+			if (!Common.onHypixel || !Common.onHousing) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

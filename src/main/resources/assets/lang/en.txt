@@ -1,3 +1,10 @@
 warning_force = "Warning: \"Force\" is setted to true (for only this session). This will allow the mod to work even out of your house. Don't forget to disable it."
+
 warning_settings = "Warning: settings can't be saved. There is a problem with saving it in ./config/"
 ERERR_SET = "Cannot save the settings"
+RESET_SET = "Clear all AND reset settings for "
+SET_SAVE_ERR = "Cannot save the current settings :("
+
+TOGGLED = " has been toggled "
+ON = "on"
+OFF = "off"
