@@ -41,7 +41,7 @@ public class Reciever {
 				String UUID = EntityPlayer.getUUID(player.getGameProfile()) + "";
 				Utiles.debug("Player " + player.getName() + " triggered save command");
 
-				Common.commandHandler.sendFast("/msg " + player.getName() + " Saving your location...");
+				Common.commandHandler.sendFast("/r Saving your location...");
 				boolean writeStatus = Main.settings.set(UUID,
 						(Math.round(player.posX * 1000.0) / 1000.0) + "!" + (Math.round(player.posY * 1000.0) / 1000.0)
 								+ "!" + (Math.round(player.posZ * 1000.0) / 1000.0));

@@ -46,7 +46,7 @@ public class Command extends CommandBase implements ICommand {
 
 			if (args[0].equals("on")) {
 				Main.settings.set("hsaver-toggled", "True");
-				showMessage(getCommandName() + " Toggled one", sender);
+				showMessage(getCommandName() + " Toggled on", sender);
 				return;
 			} else if (args[0].equals("off")) {
 				Main.settings.set("hsaver-toggled", "False");
@@ -62,6 +62,16 @@ public class Command extends CommandBase implements ICommand {
 				}
 				return;
 
+			} else if (args[0].equals("reminder")) {
+				if (args[1].equals("on")) {
+					Main.settings.set("reminder", "ON");
+					showMessage(getCommandName() + "-Reminder Toggled on", sender);
+					return;
+				} else if (args[1].equals("off")) {
+					Main.settings.set("reminder", "OFF");
+					showMessage(getCommandName() + "-Reminder Toggled off", sender);
+					return;
+				}
 			} else if (args[0].equals("load")) {
 				String username = orginArgs[1];// On Excpetion, showSyntaxError() will get trigered
 				Utiles.debug("Hsaver: load info for '" + username + "'...");
@@ -117,11 +127,17 @@ public class Command extends CommandBase implements ICommand {
 
 		if (length == 1) {
 			list.add("load");
-		} else if (length == 2 && args[0].equals("load")) {
-			List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
+			list.add("reminder");
+		} else if (length == 2) {
+			if (args[0].equals("load")) {
+				List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
 
-			for (EntityPlayer player : players) {
-				list.add(player.getName());
+				for (EntityPlayer player : players) {
+					list.add(player.getName());
+				}
+			} else if (args[0].equals("reminder")) {
+				list.add("on");
+				list.add("off");
 			}
 		}
 
@@ -146,6 +162,7 @@ public class Command extends CommandBase implements ICommand {
 		showMessage(primary + CMD_NAME + "<off,on>", sender);
 		showMessage(primary + CMD_NAME + "resetAll", sender);
 		showMessage(primary + CMD_NAME + "load <username>", sender);
+		showMessage(primary + CMD_NAME + "reminder <on/off>", sender);
 
 		return "";
 	}
