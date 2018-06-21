@@ -19,6 +19,6 @@ public class Config {
 	// Mod information
 	public final static String MOD_NAME = "Auto Housing";
 	public final static String NAME = "AutoHousing";
-	public final static String VERSION = "0.3";
+	public final static String VERSION = "0.3.2";
 	public final static String AUTHOR = "aidn5";
 }
