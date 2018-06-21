@@ -23,7 +23,7 @@ public class Reminder {
 		while (true) {
 			try {
 				Thread.sleep(Integer.valueOf(Main.settings.get("reminder-timer", "10")) * 60 * 1000);
-				if (Main.settings.get("remind", "ON").equals("ON")) {
+				if (Main.settings.get("remind", "ON").equals("ON") && Common.checkHousing()) {
 					Common.commandHandler.sendFast(Common.language.get("REMIND_SAVE", ""));
 				}
 			} catch (Exception e) {

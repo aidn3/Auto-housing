@@ -4,6 +4,7 @@ import hypixel.aidn5.housing.services.CommandHandler;
 import hypixel.aidn5.housing.services.InternetHandler;
 import hypixel.aidn5.housing.services.Manager;
 import hypixel.aidn5.housing.services.SettingsHandler;
+import hypixel.aidn5.housing.utiles.Message;
 import hypixel.aidn5.housing.utiles.Utiles;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -37,7 +38,7 @@ public class MrBrain {
 
 	public void FullTest() {
 		// API getter
-
+		Message.showMessage("Starting FullTest() for debuging...");
 		getMessage("Welcome to the Housing"); // You are in housing
 
 		// Promote: All, Parkour, Friend;
@@ -61,6 +62,8 @@ public class MrBrain {
 		getMessage("Your api is 1234-6f1d-5tg1-fg42-23rf");
 		getMessage("To [VIP] SrryDude: didnt change it at all :P");
 
+		getMessage("An exception occurred in your connection, sadd asd w deadwef qwef");
+
 	}
 
 	public void getMessage(ClientChatReceivedEvent message) {
@@ -79,7 +82,7 @@ public class MrBrain {
 	public void getMessage(String message) {
 		if (!Common.started) return;
 
-		Utiles.debug(message);
+		Message.showMessage(message);
 		Common.manager.onChat(message);
 		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.onChat(message);
 		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);

@@ -36,6 +36,7 @@ public class Main {
 
 	static public void onChat(ClientChatReceivedEvent event) {
 		if (!started) return;
+		if (!Common.checkHousing()) return;
 		if (!(event.type == 0)) return;
 
 		chatListener.onChat(event.message.getUnformattedText());

@@ -1,6 +1,6 @@
 #Changelog
 
-#### 0.1
+#### 0.1 (it's name beta-1.0)
 + AutoPromote: onParkour, Join, Certain word said
 + Debug tool
 
@@ -13,7 +13,7 @@
 > Change names of every plug-in
 > Performence enhanced
 
-#### 0.3 - 0.3.2
+#### 0.3 - 0.3.2 (not tagged)
 + Adding Changelog
 + Anti-Griefer: Adding(Disabled), WIP
 + HSaver-Reminder-timer: announcements, reminding users they can do !save
@@ -25,4 +25,6 @@
 #### 0.3.3
 + HSaver: Manually save players positions via command
 + HSaver-Reminder-timer: make it toggable
++ option: autoReconnect when an exception occurred in the connection...
 > HSaver-Reminder: change from PM to Public message
+> Mod: fix MessageViewer

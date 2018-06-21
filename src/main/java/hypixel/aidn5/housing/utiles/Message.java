@@ -1,5 +1,11 @@
 package hypixel.aidn5.housing.utiles;
 
+import hypixel.aidn5.housing.Common;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
+
 public class Message {
 
 	// Check if it's from the server and not player
@@ -13,6 +19,14 @@ public class Message {
 	// View message to the player
 	static public void showMessage(String message) {
 		Utiles.debug("Show message: " + message);
+
+		IChatComponent component = new ChatComponentText(message);
+
+		ChatStyle style = new ChatStyle();
+		style.setColor(EnumChatFormatting.YELLOW);
+		component.setChatStyle(style);
+
+		Common.mc.thePlayer.addChatMessage(component);
 	}
 
 	static public String getUsername(String message) {

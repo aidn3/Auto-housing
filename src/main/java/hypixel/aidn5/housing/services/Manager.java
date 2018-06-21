@@ -27,11 +27,11 @@ public class Manager {
 	public void onChat(String message) {
 		if (Message.LegitMsg(message)) {
 			Utiles.debug("Message is legit");
+			checkHubMsg(message);
 		} else {
 			Utiles.debug("Message is NOT legit");
 		}
 		String API = filterAPI(message);
-		checkHubMsg(message);
 		checkTestMsg(message);
 	}
 
@@ -48,6 +48,26 @@ public class Manager {
 			if (message.contains(possible)) {
 				Common.onHousing = false;
 				return true;
+			}
+		}
+		if (Common.autoReconnect) {
+			for (String possible : Config.OnAutoReconnectStr) {
+				if (message.contains(possible)) {
+					Message.showMessage("Sending you back to your house in 5 seconds...");
+					(new Thread(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Thread.sleep(5000);
+								Common.commandHandler.sendSlow("/home");
+							} catch (Exception e) {
+								Utiles.debug(e);
+							}
+
+						}
+					})).start();
+					return true;
+				}
 			}
 		}
 		return false;

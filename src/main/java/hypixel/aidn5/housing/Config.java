@@ -15,10 +15,11 @@ public class Config {
 	// Mod variables
 	public static String[] OnHousingStr = new String[] { "Welcome to the Housing", " entered the world" };
 	public static String[] OnNotHousingStr = new String[] { "Sending you to" };
+	public static String[] OnAutoReconnectStr = new String[] { "exception occurred in your connection" };
 
 	// Mod information
 	public final static String MOD_NAME = "Auto Housing";
 	public final static String NAME = "AutoHousing";
-	public final static String VERSION = "0.3.2";
+	public final static String VERSION = "0.3.3";
 	public final static String AUTHOR = "aidn5";
 }
