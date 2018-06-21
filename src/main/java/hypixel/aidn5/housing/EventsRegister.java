@@ -13,20 +13,19 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 @Mod(modid = Config.MOD_NAME, version = Config.VERSION)
 
 public class EventsRegister {
-	MrBrain mrBrain;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		// FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
 		Utiles.debug("MOD STARTED");
-		mrBrain = new MrBrain();
-		mrBrain.prepare();
+		Common.mrBrain = new MrBrain();
+		Common.mrBrain.prepare();
 	}
 
 	@SubscribeEvent
 	public void onPlayerChatReceive(ClientChatReceivedEvent event) {
-		mrBrain.getMessage(event);
+		Common.mrBrain.getMessage(event);
 
 	}
 

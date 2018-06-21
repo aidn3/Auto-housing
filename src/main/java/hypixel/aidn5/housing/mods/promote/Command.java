@@ -7,13 +7,12 @@ import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.Config;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-public class Command extends CommandBase implements ICommand {
+public class Command extends CommandBase {
 	private String primary = EnumChatFormatting.AQUA + "";
 	private String neutral = EnumChatFormatting.GRAY + "";
 	private String secondary = EnumChatFormatting.YELLOW + "";
@@ -42,23 +41,9 @@ public class Command extends CommandBase implements ICommand {
 				args[i] = args[i].toLowerCase(); // make it "unvirsal"
 			}
 
-			if (args[0].equals("settings")) {
-				settingsChange(args, sender);
-				return;
-			} else if (args[0].equals("debug")) {
-				if (args[1].equals("on")) {
-					Main.settings.set("debug_mode", "True");
-					Config.debug_mode = true;
-				} else {
-					Main.settings.set("debug_mode", "False");
-					Config.debug_mode = false;
-				}
-				return;
-
-			} else if (args[0].equals("status")) {
+			if (args[0].equals("status")) {
 				viewStatus(sender);
 				return;
-
 			} else if (args[0].equals("p") || args[0].equals("parkour")) {
 				promoteChange("ap-pk", args[1], sender);
 				return;
@@ -119,15 +104,9 @@ public class Command extends CommandBase implements ICommand {
 
 	private void viewStatus(ICommandSender sender) {
 		showMessage(primary + "AutoPromote: ", sender);
-		showMessage(primary + "Toggled: " + secondary + Main.settings.set("toggled", "OFF"), sender);
 		showMessage(primary + "All: " + secondary + Main.settings.get("ap-jn", "OFF"), sender);
 		showMessage(primary + "Friends: " + secondary + Main.settings.get("ap-fr", "OFF"), sender);
 		showMessage(primary + "Parkour: " + secondary + Main.settings.get("ap-pk", "OFF"), sender);
-		if (Config.debug_mode) {
-			showMessage(primary + "onForce: " + secondary + String.valueOf(Common.onForce), sender);
-			showMessage(primary + "onHypixel: " + secondary + String.valueOf(Common.onHypixel), sender);
-			showMessage(primary + "onHousing: " + secondary + String.valueOf(Common.onHousing), sender);
-		}
 	}
 
 	@Override
@@ -165,7 +144,7 @@ public class Command extends CommandBase implements ICommand {
 	public List<String> getCommandAliases() {
 		List<String> aliases = new ArrayList();
 		for (String command : commands_name) {
-			aliases.add(command);
+			aliases.add("/" + command);
 		}
 		return aliases;
 	}

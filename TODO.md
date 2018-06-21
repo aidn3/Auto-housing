@@ -1,8 +1,14 @@
-### TODO LIST  
-- Adding an option to promote friends on joining  
-- Adding feature: updates checker  
-- Adding Anti-Griefer feature  
+# TODO LIST  
+
+#### Mod-Enhance
+- option: to promote friends on joining  
 - Option: autoReconnect when "Exception occ..."
 - Command: Remove all [Rank]
+
+#### Core-changing
+- feature: updates checker  
+- new-mod: Anti-Griefer  
+
+#### Cosmetic
 - Seperate command to control the mod
 

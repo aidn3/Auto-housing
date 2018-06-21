@@ -6,6 +6,7 @@ import hypixel.aidn5.housing.services.Manager;
 import hypixel.aidn5.housing.services.SettingsHandler;
 import hypixel.aidn5.housing.utiles.Utiles;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;;
 
 public class MrBrain {
@@ -25,6 +26,9 @@ public class MrBrain {
 		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.start();
 		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.start();
 		if (Config.HGriefer) hypixel.aidn5.housing.mods.anti_griefer.Main.start();
+
+		ClientCommandHandler.instance.registerCommand(new MainCommand(new String[] { "hsettings", "ha" }));
+
 		Common.started = true;
 
 		// Full test for commands
@@ -34,7 +38,7 @@ public class MrBrain {
 	public void FullTest() {
 		// API getter
 
-		getMessage("Welcome to the Housing!"); // You are in housing
+		getMessage("Welcome to the Housing"); // You are in housing
 
 		// Promote: All, Parkour, Friend;
 		getMessage("HerrmanncamYT completed the parkour in 20:22.724!"); // Active onParkour Promote
@@ -64,7 +68,9 @@ public class MrBrain {
 		if (Config.debug_mode && message.message.getUnformattedText().contains("TEST FULL")) {
 			FullTest();
 		}
-		// Common.manager.onChat(message);
+		String messageUn = message.message.getUnformattedText();
+		Utiles.debug(messageUn);
+		Common.manager.onChat(messageUn);
 		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.onChat(message);
 		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
 		if (Config.HGriefer) hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
@@ -72,8 +78,8 @@ public class MrBrain {
 
 	public void getMessage(String message) {
 		if (!Common.started) return;
-		Utiles.debug(message);
 
+		Utiles.debug(message);
 		Common.manager.onChat(message);
 		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.onChat(message);
 		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);

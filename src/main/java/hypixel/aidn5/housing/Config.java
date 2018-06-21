@@ -12,6 +12,10 @@ public class Config {
 	public static boolean HSaver = true;
 	public static boolean HGriefer = false;
 
+	// Mod variables
+	public static String[] OnHousingStr = new String[] { "Welcome to the Housing", " entered the world" };
+	public static String[] OnNotHousingStr = new String[] { "Sending you to" };
+
 	// Mod information
 	public final static String MOD_NAME = "Auto Housing";
 	public final static String NAME = "AutoHousing";

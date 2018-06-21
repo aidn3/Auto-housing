@@ -3,6 +3,7 @@ package hypixel.aidn5.housing.services;
 import java.util.HashMap;
 
 import hypixel.aidn5.housing.Common;
+import hypixel.aidn5.housing.Config;
 import hypixel.aidn5.housing.utiles.Message;
 import hypixel.aidn5.housing.utiles.Utiles;
 
@@ -31,15 +32,23 @@ public class Manager {
 		}
 		String API = filterAPI(message);
 		checkHubMsg(message);
+		checkTestMsg(message);
 	}
 
+	private void checkTestMsg(String message) {}
+
 	private boolean checkHubMsg(String message) {
-		if (message.contains("Welcome to the Housing")) {
-			Common.onHousing = true;
-			return true;
-		} else if (message.contains("Sending you to")) {
-			Common.onHousing = false;
-			return true;
+		for (String possible : Config.OnHousingStr) {
+			if (message.contains(possible)) {
+				Common.onHousing = true;
+				return true;
+			}
+		}
+		for (String possible : Config.OnNotHousingStr) {
+			if (message.contains(possible)) {
+				Common.onHousing = false;
+				return true;
+			}
 		}
 		return false;
 	}
@@ -62,7 +71,6 @@ public class Manager {
 
 		String[] data_1 = settings.split("|");
 		for (String info : data_1) {
-
 			String[] data_2 = info.split(":");
 			people_data.put(data_2[0], data_2[1]);
 		}

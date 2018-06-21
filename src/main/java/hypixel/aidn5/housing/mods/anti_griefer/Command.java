@@ -7,13 +7,12 @@ import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.Config;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-public class Command extends CommandBase implements ICommand {
+public class Command extends CommandBase {
 	private String primary = EnumChatFormatting.AQUA + "";
 	private String neutral = EnumChatFormatting.GRAY + "";
 	private String secondary = EnumChatFormatting.YELLOW + "";
@@ -187,7 +186,7 @@ public class Command extends CommandBase implements ICommand {
 	public List<String> getCommandAliases() {
 		List<String> aliases = new ArrayList();
 		for (String command : commands_name) {
-			aliases.add(command);
+			aliases.add("/" + command);
 		}
 		return aliases;
 	}
