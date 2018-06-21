@@ -62,12 +62,16 @@ public class Command extends CommandBase {
 				return;
 
 			} else if (args[0].equals("reminder")) {
-				if (length == 1) {
-					showMessage(getCommandName() + "-Reminder: starting...", sender);
-					Main.reminder.start();
+				if (args[1].equals("every")) {
+					int timer = Integer.valueOf(args[2]);
+					if (timer > 1) throw new Exception("");
+					if (!Main.settings.set("reminder-timer", String.valueOf(timer))) {
+						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
+						return;
+					}
+					showMessage(getCommandName() + "-Reminder will send message every " + timer, sender);
 					return;
-				}
-				if (args[1].equals("on")) {
+				} else if (args[1].equals("on")) {
 					Main.settings.set("reminder", "ON");
 					showMessage(getCommandName() + "-Reminder Toggled on", sender);
 					return;
@@ -101,9 +105,26 @@ public class Command extends CommandBase {
 					showError("Unable to fetch the data", sender);
 				}
 				return;
+			} else if (args[0].equals("save")) {
+				EntityPlayer player = Common.mc.theWorld.getPlayerEntityByName(args[1]);
+				if (player == null) {
+					showError("Are you sure, the player is around you?", sender);
+					return;
+				}
+				String UUID = EntityPlayer.getUUID(player.getGameProfile()) + "";
+
+				boolean writeStatus = Main.settings.set(UUID,
+						(Math.round(player.posX * 1000.0) / 1000.0) + "!" + (Math.round(player.posY * 1000.0) / 1000.0)
+								+ "!" + (Math.round(player.posZ * 1000.0) / 1000.0));
+				if (writeStatus) {
+					showMessage(player.getName() + "'s location saved!", sender);
+				} else {
+					showError("There was an error saving " + player.getName() + "' location!", sender);
+				}
+				return;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Utiles.debug(e);
 		}
 
 		showSyntaxError(sender);
@@ -131,9 +152,10 @@ public class Command extends CommandBase {
 
 		if (length == 1) {
 			list.add("load");
+			list.add("save");
 			list.add("reminder");
 		} else if (length == 2) {
-			if (args[0].equals("load")) {
+			if (args[0].equals("load") || args[0].equals("save")) {
 				List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
 
 				for (EntityPlayer player : players) {
@@ -142,6 +164,7 @@ public class Command extends CommandBase {
 			} else if (args[0].equals("reminder")) {
 				list.add("on");
 				list.add("off");
+				list.add("every");
 			}
 		}
 
@@ -166,7 +189,9 @@ public class Command extends CommandBase {
 		showMessage(primary + CMD_NAME + "<off,on>", sender);
 		showMessage(primary + CMD_NAME + "resetAll", sender);
 		showMessage(primary + CMD_NAME + "load <username>", sender);
+		showMessage(primary + CMD_NAME + "save <username>", sender);
 		showMessage(primary + CMD_NAME + "reminder <on/off>", sender);
+		showMessage(primary + CMD_NAME + "reminder every <time(in minutes)>", sender);
 
 		return "";
 	}

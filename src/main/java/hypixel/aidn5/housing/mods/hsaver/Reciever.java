@@ -48,7 +48,6 @@ public class Reciever {
 				if (writeStatus) {
 					Common.commandHandler.sendFast("/r Location saved! Let " + Common.master
 							+ " know when you need your location loaded back.");
-					Main.reminder.addPlayer(player.getName());
 				} else {
 					Common.commandHandler.sendFast("/r There was an error saving your location!");
 				}

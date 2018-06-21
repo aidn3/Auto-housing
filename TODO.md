@@ -10,5 +10,4 @@
 - new-mod: Anti-Griefer  
 
 #### Cosmetic
-- Seperate command to control the mod
 
