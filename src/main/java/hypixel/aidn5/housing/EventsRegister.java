@@ -27,7 +27,15 @@ public class EventsRegister {
 	@SubscribeEvent
 	public void onPlayerChatReceive(ClientChatReceivedEvent event) {
 		mrBrain.getMessage(event);
+
 	}
+
+	/*
+	 * public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int
+	 * meta) {
+	 * 
+	 * }
+	 */
 
 	@SubscribeEvent
 	public void playerLoggedIn(FMLNetworkEvent.ClientConnectedToServerEvent event) {

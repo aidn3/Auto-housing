@@ -22,9 +22,9 @@ public class MrBrain {
 		Common.internetHandler = new InternetHandler();
 		Common.manager = new Manager();
 
-		hypixel.aidn5.housing.mods.promote.Main.start();
-		hypixel.aidn5.housing.mods.hsaver.Main.start();
-		hypixel.aidn5.housing.mods.anti_griefer.Main.start();
+		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.start();
+		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.start();
+		if (Config.HGriefer) hypixel.aidn5.housing.mods.anti_griefer.Main.start();
 		Common.started = true;
 
 		// Full test for commands
@@ -65,9 +65,9 @@ public class MrBrain {
 			FullTest();
 		}
 		// Common.manager.onChat(message);
-		hypixel.aidn5.housing.mods.promote.Main.onChat(message);
-		hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
-		hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.onChat(message);
+		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
+		if (Config.HGriefer) hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
 	}
 
 	public void getMessage(String message) {
@@ -75,9 +75,9 @@ public class MrBrain {
 		Utiles.debug(message);
 
 		Common.manager.onChat(message);
-		hypixel.aidn5.housing.mods.promote.Main.onChat(message);
-		hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
-		hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		if (Config.HPromote) hypixel.aidn5.housing.mods.promote.Main.onChat(message);
+		if (Config.HSaver) hypixel.aidn5.housing.mods.hsaver.Main.onChat(message);
+		if (Config.HGriefer) hypixel.aidn5.housing.mods.anti_griefer.Main.onChat(message);
 	}
 
 }

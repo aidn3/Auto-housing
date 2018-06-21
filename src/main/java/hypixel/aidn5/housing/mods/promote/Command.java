@@ -42,18 +42,7 @@ public class Command extends CommandBase implements ICommand {
 				args[i] = args[i].toLowerCase(); // make it "unvirsal"
 			}
 
-			if (args[0].equals("on")) {
-				showMessage(primary + "/" + getCommandName() + " toggled on", sender);
-				Main.settings.set("toggled", "ON");
-				if (length > 1 && args[1].equals("force")) Common.onForce = true;
-				return;
-			} else if (args[0].equals("off")) {
-				showMessage(primary + "/" + getCommandName() + " toggled off", sender);
-				Main.settings.set("toggled", "OFF");
-				Common.onForce = false;
-				return;
-
-			} else if (args[0].equals("settings")) {
+			if (args[0].equals("settings")) {
 				settingsChange(args, sender);
 				return;
 			} else if (args[0].equals("debug")) {
@@ -93,7 +82,7 @@ public class Command extends CommandBase implements ICommand {
 		if (Key.equals("co") || Key.equals("co-owner")) settings_value = "Co-Owner";
 		else if (Key.equals("res") || Key.equals("resident")) settings_value = "Resident";
 		else if (Key.equals("guest")) settings_value = "Guest";
-		else if (Key.equals("off")) settings_value = "off";
+		else if (Key.equals("off")) settings_value = "OFF";
 		else {
 			// the user mis-typed
 			showSyntaxError(sender);
@@ -195,7 +184,6 @@ public class Command extends CommandBase implements ICommand {
 		String CMD_NAME = "/" + getCommandName() + " ";
 		showMessage(neutral + "--------------------", sender);
 		showMessage(secondary + Config.MOD_NAME, sender);
-		showMessage(primary + CMD_NAME + "<off,on>", sender);
 		showMessage(primary + CMD_NAME + "status", sender);
 		showMessage(primary + CMD_NAME + "All(A) <off,res,co>", sender);
 		showMessage(primary + CMD_NAME + "Friends(F) <off,res,co>", sender);

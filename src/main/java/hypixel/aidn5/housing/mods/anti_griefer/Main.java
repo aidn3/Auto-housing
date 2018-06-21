@@ -1,14 +1,20 @@
 package hypixel.aidn5.housing.mods.anti_griefer;
 
+import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.services.SettingsHandler;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 
 public class Main {
 	static String MOD_NAME = "Anti-Griefer";
+
 	static SettingsHandler settings;
-	static Manager manager;
+	static ChatListener chatListener;
+	static PlayerListener playerListener;
+	static BlockRowListener blockRowListener;
+
 	static boolean started = false;
+	static int performence = 3;
 
 	static public void start() {
 		prepare();
@@ -17,8 +23,10 @@ public class Main {
 	static void prepare() {
 		if (started) return;
 
-		manager = new Manager();
 		settings = new SettingsHandler("promote");
+		chatListener = new ChatListener();
+		playerListener = new PlayerListener();
+		blockRowListener = new BlockRowListener();
 
 		String[] commands = new String[] { "hgriefer", "hg" };
 		ClientCommandHandler.instance.registerCommand(new Command(commands));
@@ -30,11 +38,13 @@ public class Main {
 		if (!started) return;
 		if (!(event.type == 0)) return;
 
-		manager.onChat(event.message.getUnformattedText());
+		chatListener.onChat(event.message.getUnformattedText());
 	}
 
 	static public void onChat(String message) {
 		if (!started) return;
-		manager.onChat(message);
+		if (!Common.checkHousing()) return;
+
+		chatListener.onChat(message);
 	}
 }

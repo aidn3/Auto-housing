@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.utiles.Message;
+import hypixel.aidn5.housing.utiles.Utiles;
 
 public class Manager {
 	private boolean API_Searcher = false;
@@ -23,7 +24,24 @@ public class Manager {
 	 */
 
 	public void onChat(String message) {
+		if (Message.LegitMsg(message)) {
+			Utiles.debug("Message is legit");
+		} else {
+			Utiles.debug("Message is NOT legit");
+		}
 		String API = filterAPI(message);
+		checkHubMsg(message);
+	}
+
+	private boolean checkHubMsg(String message) {
+		if (message.contains("Welcome to the Housing")) {
+			Common.onHousing = true;
+			return true;
+		} else if (message.contains("Sending you to")) {
+			Common.onHousing = false;
+			return true;
+		}
+		return false;
 	}
 
 	private void playerRankCheck(String message) {

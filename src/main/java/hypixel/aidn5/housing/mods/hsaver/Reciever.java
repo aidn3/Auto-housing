@@ -46,16 +46,17 @@ public class Reciever {
 						(Math.round(player.posX * 1000.0) / 1000.0) + "!" + (Math.round(player.posY * 1000.0) / 1000.0)
 								+ "!" + (Math.round(player.posZ * 1000.0) / 1000.0));
 				if (writeStatus) {
-					Common.commandHandler.sendFast("/msg " + player.getName() + " Location saved! Let " + Common.master
+					Common.commandHandler.sendFast("/r Location saved! Let " + Common.master
 							+ " know when you need your location loaded back.");
+					Main.reminder.addPlayer(player.getName());
 				} else {
-					Common.commandHandler
-							.sendFast("/msg " + player.getName() + " There was an error saving your location!");
+					Common.commandHandler.sendFast("/r There was an error saving your location!");
 				}
 				return true;
 			}
 		} catch (Exception e) {
 			Utiles.debug("ERROR-Hsaver-onChat-Exception: message was: " + message);
+			Utiles.debug(e);
 		}
 		return false;
 	}

@@ -1,11 +1,14 @@
 package hypixel.aidn5.housing.mods.anti_griefer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import hypixel.aidn5.housing.Common;
 import hypixel.aidn5.housing.Config;
 import hypixel.aidn5.housing.utiles.Message;
+import hypixel.aidn5.housing.utiles.Utiles;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PlayerListener {
@@ -14,15 +17,40 @@ public class PlayerListener {
 	private Thread background;
 	private Runnable backgroundprocess;
 
-	private HashMap<String, Player> people;
+	private HashMap<String, double[]> playersPos;
 
 	public PlayerListener() {
-		people = new HashMap();
+		playersPos = new HashMap();
 		prepare();
 	}
 
-	public Player getPlayer(String username) {
-		return people.getOrDefault(username, null);
+	public String[] getPlayersInRange(int range, int x, int y, int z) {
+		// TODO getPlayerInRange competiable with performence meter
+		List<String> playersInRange = new ArrayList();
+
+		if (Main.performence == 3) {
+			List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
+
+			for (EntityPlayer entityPlayer : players) {
+				if (Utiles.Distance3D(x, y, z, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ) <= range) {
+					playersInRange.add(entityPlayer.getName());
+				}
+			}
+			return (String[]) playersInRange.toArray();
+
+		} else if (Main.performence == 2) {
+			if (playersPos == null || playersPos.isEmpty()) return new String[] {};
+
+			HashMap<String, double[]> playersPos1 = (HashMap<String, double[]>) playersPos.clone();
+			for (Entry<String, double[]> entry : playersPos1.entrySet()) {
+
+				double[] blockPos = entry.getValue();
+				if (Utiles.Distance3D(x, y, z, blockPos[0], blockPos[1], blockPos[2]) <= range) {
+					playersInRange.add(entry.getKey());
+				}
+			}
+		}
+		return new String[] {};
 	}
 
 	private void prepare() {
@@ -39,98 +67,26 @@ public class PlayerListener {
 		int ErrorNr = 0;
 		try {
 			while (true) {
-				List<EntityPlayer> entityPlayers = Common.mc.theWorld.playerEntities;
-				for (EntityPlayer entityPlayer : entityPlayers) {
-					if (!people.containsKey(entityPlayer.getName()) || people.get(entityPlayer.getName()).needRestart) {
-						people.put(entityPlayer.getName(), new Player(entityPlayer.getName()));
+				Thread.sleep(Config.refresh_Speed);
+				if (Main.performence == 2) {
+					HashMap<String, double[]> playersPos1 = new HashMap();
+					List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
+
+					for (EntityPlayer entityPlayer : players) {
+						double[] pos = new double[] { entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ };
+						playersPos1.put(entityPlayer.getName(), pos);
 					}
-					people.get(entityPlayer.getName()).last_access = (int) (System.currentTimeMillis() / 1000);
+					playersPos = playersPos1;
 				}
-				Thread.sleep(5000);
 			}
 		} catch (Exception e) {
 			ErrorNr++;
-			if (Config.debug_mode) e.printStackTrace();
+			Utiles.debug(e);
 		}
 		if (ErrorNr > 10) {
-			Message.showMessage("ERROR: PlayerListener can't keep up! You can try to run it again...");
+			Message.showMessage(Common.language.get("THREAD_ERR", ""));
 		} else {
 			Listener();
 		}
-
-	}
-
-	private class Player {
-		public String playerName;
-		public boolean needRestart = false;
-		public int last_access = 0;
-
-		private HashMap<String, String> settings;
-		private boolean Start = true;
-		private Thread thread;
-		private Runnable runnable;
-
-		public Player(String username) {
-			playerName = username;
-			settings = new HashMap();
-			settings.put("is_moving", "0");
-			prepare();
-		}
-
-		private void prepare() {
-			runnable = new Runnable() {
-				@Override
-				public void run() {
-					background();
-				}
-			};
-			thread = new Thread(runnable);
-		}
-
-		public void start(boolean true_) {
-			if (true_) {
-				if (!Start) { // If it wasn't started
-					Start = true;
-					prepare();
-				}
-			}
-
-			Start = true_;
-		}
-
-		public int movingTime() {
-			return Integer.parseInt(settings.get("is_moving"));
-		}
-
-		private void background() {
-			int ErrorNr = 0;
-			try {
-				while (true) {
-					if (!Start) return;
-					if (needRestart) return;
-					Thread.sleep(1000);
-
-					EntityPlayer entityPlayer = Common.mc.theWorld.getPlayerEntityByName(playerName);
-					settings.put("last_pos", entityPlayer.posX + "|" + entityPlayer.posY + "|" + entityPlayer.posZ);
-
-					String[] pos = settings.get("last_pos").split("|");
-					if (!pos[0].equals(entityPlayer.posX + "") || !pos[1].equals(entityPlayer.posY + "")
-							|| !pos[2].equals(entityPlayer.posZ + "")) {
-						settings.put("is_moving", (Integer.valueOf(settings.get("is_moving") + 1) + ""));
-					} else {
-						settings.put("is_moving", "0");
-					}
-				}
-			} catch (Exception e) {
-				ErrorNr++;
-			}
-			if (ErrorNr > 10) {
-				Message.showMessage("ERROR: player '" + playerName + "' can't keep up!...");
-				needRestart = true;
-			} else {
-				Listener();
-			}
-		}
-
 	}
 }

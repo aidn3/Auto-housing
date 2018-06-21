@@ -61,7 +61,9 @@ public class SettingsHandler {
 
 			if (IN_JAR) return true;
 			return SaveUserSettings();
-		} catch (Exception ignore) {}
+		} catch (Exception e) {
+			Utiles.debug(e);
+		}
 		return false;
 	}
 

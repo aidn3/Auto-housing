@@ -8,7 +8,7 @@ public class Reciever {
 
 	public void onChat(String message) {
 		if (message == null) return;
-		if (!Common.onForce && !checkSet(message)) {
+		if (!Common.checkHousing()) {
 			Utiles.debug("AutoPromoteMessage: No onForce; Exit");
 			return;
 		}
@@ -18,14 +18,6 @@ public class Reciever {
 		} else {
 			fromPlayer(message);
 		}
-	}
-
-	// common commands
-	public boolean checkSet(String message) {
-		if (!Common.onHypixel) return false;
-		if (!Common.onHousing) return false;
-		if (!Main.settings.get("toggled", "OFF").equals("ON")) return false;
-		return true;
 	}
 
 	// Part where the message should from player
