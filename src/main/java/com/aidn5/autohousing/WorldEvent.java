@@ -1,4 +1,4 @@
-package com.aidn5.housing;
+package com.aidn5.autohousing;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

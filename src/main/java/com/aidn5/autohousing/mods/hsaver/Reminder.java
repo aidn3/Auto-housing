@@ -1,7 +1,7 @@
-package com.aidn5.housing.mods.hsaver;
+package com.aidn5.autohousing.mods.hsaver;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.utiles.Utiles;
 
 public class Reminder {
 	private Thread thread;

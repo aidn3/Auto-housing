@@ -1,7 +1,7 @@
-package com.aidn5.housing;
+package com.aidn5.autohousing;
 
-import com.aidn5.housing.main.MrBrain;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.main.MrBrain;
+import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -29,12 +29,10 @@ public class EventsRegister {
 	@SubscribeEvent
 	public void onPlayerChatReceive(ClientChatReceivedEvent event) {
 		mrBrain.getMessage(event);
-
 	}
 
 	@SubscribeEvent
 	public void playerLoggedIn(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-
 		try {
 			Minecraft mc = Minecraft.getMinecraft();
 			Utiles.debug("playerLoggedIn(): Logged into network - " + mc.getCurrentServerData().serverIP);
@@ -50,5 +48,4 @@ public class EventsRegister {
 		Utiles.debug("onLoggedOut(): Logged out from network");
 		Common.onHypixel = false;
 	}
-
 }

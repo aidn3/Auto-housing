@@ -1,10 +1,10 @@
-package com.aidn5.housing.services;
+package com.aidn5.autohousing.services;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
 
 public class CommandHandler {
 	private Thread thread1;

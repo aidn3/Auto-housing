@@ -1,11 +1,11 @@
-package com.aidn5.housing.services;
+package com.aidn5.autohousing.services;
 
 import java.util.HashMap;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
-import com.aidn5.housing.utiles.Message;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
+import com.aidn5.autohousing.utiles.Message;
+import com.aidn5.autohousing.utiles.Utiles;
 
 public class Manager {
 	private boolean API_Searcher = false;

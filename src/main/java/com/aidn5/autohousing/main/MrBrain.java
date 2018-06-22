@@ -1,13 +1,13 @@
-package com.aidn5.housing.main;
+package com.aidn5.autohousing.main;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
-import com.aidn5.housing.services.CommandHandler;
-import com.aidn5.housing.services.InternetHandler;
-import com.aidn5.housing.services.Manager;
-import com.aidn5.housing.services.SettingsHandler;
-import com.aidn5.housing.utiles.Message;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
+import com.aidn5.autohousing.services.CommandHandler;
+import com.aidn5.autohousing.services.InternetHandler;
+import com.aidn5.autohousing.services.Manager;
+import com.aidn5.autohousing.services.SettingsHandler;
+import com.aidn5.autohousing.utiles.Message;
+import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -28,9 +28,9 @@ public class MrBrain {
 		Common.internetHandler = new InternetHandler();
 		manager = new Manager();
 
-		if (Config.HPromote) com.aidn5.housing.mods.promote.Main.start();
-		if (Config.HSaver) com.aidn5.housing.mods.hsaver.Main.start();
-		if (Config.HGriefer) com.aidn5.housing.mods.anti_griefer.Main.start();
+		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.start();
+		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.start();
+		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.start();
 
 		ClientCommandHandler.instance.registerCommand(new MainCommand(new String[] { "hsettings", "ha" }));
 
@@ -78,9 +78,9 @@ public class MrBrain {
 		String messageUn = message.message.getUnformattedText();
 		Utiles.debug(messageUn);
 		manager.onChat(messageUn);
-		if (Config.HPromote) com.aidn5.housing.mods.promote.Main.onChat(message);
-		if (Config.HSaver) com.aidn5.housing.mods.hsaver.Main.onChat(message);
-		if (Config.HGriefer) com.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.onChat(message);
+		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.onChat(message);
+		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.onChat(message);
 	}
 
 	public void getMessage(String message) {
@@ -88,9 +88,9 @@ public class MrBrain {
 
 		Message.showMessage(message);
 		manager.onChat(message);
-		if (Config.HPromote) com.aidn5.housing.mods.promote.Main.onChat(message);
-		if (Config.HSaver) com.aidn5.housing.mods.hsaver.Main.onChat(message);
-		if (Config.HGriefer) com.aidn5.housing.mods.anti_griefer.Main.onChat(message);
+		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.onChat(message);
+		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.onChat(message);
+		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.onChat(message);
 	}
 
 }

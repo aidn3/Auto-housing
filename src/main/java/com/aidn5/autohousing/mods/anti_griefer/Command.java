@@ -1,10 +1,10 @@
-package com.aidn5.housing.mods.anti_griefer;
+package com.aidn5.autohousing.mods.anti_griefer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

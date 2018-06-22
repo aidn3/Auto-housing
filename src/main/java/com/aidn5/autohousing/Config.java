@@ -1,4 +1,4 @@
-package com.aidn5.housing;
+package com.aidn5.autohousing;
 
 public class Config {
 

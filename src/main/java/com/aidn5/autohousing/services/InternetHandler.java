@@ -1,4 +1,4 @@
-package com.aidn5.housing.services;
+package com.aidn5.autohousing.services;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

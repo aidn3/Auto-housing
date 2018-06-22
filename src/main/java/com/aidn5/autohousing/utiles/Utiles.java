@@ -1,6 +1,6 @@
-package com.aidn5.housing.utiles;
+package com.aidn5.autohousing.utiles;
 
-import com.aidn5.housing.Config;
+import com.aidn5.autohousing.Config;
 
 public class Utiles {
 	static public void debug(String data) {

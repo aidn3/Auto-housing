@@ -1,11 +1,11 @@
-package com.aidn5.housing.mods.hsaver;
+package com.aidn5.autohousing.mods.hsaver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
+import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -65,12 +65,12 @@ public class Command extends CommandBase {
 			} else if (args[0].equals("reminder")) {
 				if (args[1].equals("every")) {
 					int timer = Integer.valueOf(args[2]);
-					if (timer > 1) throw new Exception("");
+					if (timer < 1) throw new Exception("");
 					if (!Main.settings.set("reminder-timer", String.valueOf(timer))) {
 						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
 						return;
 					}
-					showMessage(getCommandName() + "-Reminder will send message every " + timer, sender);
+					showMessage(getCommandName() + "-Reminder will send message every " + timer + " minute", sender);
 					return;
 				} else if (args[1].equals("on")) {
 					Main.settings.set("reminder", "ON");

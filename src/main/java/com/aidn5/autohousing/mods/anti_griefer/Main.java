@@ -1,7 +1,7 @@
-package com.aidn5.housing.mods.anti_griefer;
+package com.aidn5.autohousing.mods.anti_griefer;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.services.SettingsHandler;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;

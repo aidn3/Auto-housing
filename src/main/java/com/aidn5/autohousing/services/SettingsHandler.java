@@ -1,4 +1,4 @@
-package com.aidn5.housing.services;
+package com.aidn5.autohousing.services;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +9,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
+import com.aidn5.autohousing.utiles.Utiles;
 
 public class SettingsHandler {
 	public boolean DIR_CHECKED = false;

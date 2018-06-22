@@ -1,9 +1,9 @@
-package com.aidn5.housing;
+package com.aidn5.autohousing;
 
-import com.aidn5.housing.services.CommandHandler;
-import com.aidn5.housing.services.InternetHandler;
-import com.aidn5.housing.services.SettingsHandler;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.services.CommandHandler;
+import com.aidn5.autohousing.services.InternetHandler;
+import com.aidn5.autohousing.services.SettingsHandler;
+import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
 

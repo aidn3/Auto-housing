@@ -1,11 +1,11 @@
-package com.aidn5.housing.mods.hsaver;
+package com.aidn5.autohousing.mods.hsaver;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.utiles.Message;
-import com.aidn5.housing.utiles.Utiles;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.utiles.Message;
+import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.entity.player.EntityPlayer;
 

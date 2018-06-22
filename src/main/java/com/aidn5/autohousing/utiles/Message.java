@@ -1,6 +1,6 @@
-package com.aidn5.housing.utiles;
+package com.aidn5.autohousing.utiles;
 
-import com.aidn5.housing.Common;
+import com.aidn5.autohousing.Common;
 
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;

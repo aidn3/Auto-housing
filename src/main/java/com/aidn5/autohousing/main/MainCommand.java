@@ -1,10 +1,10 @@
-package com.aidn5.housing.main;
+package com.aidn5.autohousing.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.Config;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

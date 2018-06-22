@@ -1,7 +1,7 @@
-package com.aidn5.housing.mods.hsaver;
+package com.aidn5.autohousing.mods.hsaver;
 
-import com.aidn5.housing.Common;
-import com.aidn5.housing.services.SettingsHandler;
+import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
