@@ -1,5 +1,5 @@
 # Auto-housing
-automating [Owner] and [Co-Owner] jobs from giving [Rank] after completing a parkour course till giving the opportunity to guests to save their location in a maze, parkour and etc. for later visit.  
+Automating [Owner] and [Co-Owner] jobs from giving [Rank] after completing a parkour course till giving the opportunity to guests to save their location in a maze, parkour and etc. for later visit.  
   
 ### Mods  
 - Auto-Promote @aidn5  

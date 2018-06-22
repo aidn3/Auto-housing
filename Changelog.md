@@ -28,3 +28,7 @@
 + option: autoReconnect when an exception occurred in the connection...
 > HSaver-Reminder: change from PM to Public message
 > Mod: fix MessageViewer
+> Mod: Change some static classes to private
+> Mod: Change all the names of the classes
+> Mod: make folder "main" for some un-seperated classes
+> 
