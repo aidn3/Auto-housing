@@ -25,74 +25,75 @@ public class BlockRowListener {
 		}
 
 		if (!added) {
-			bRows.add(new RowBlock(5));
+			RowBlock rBlock = new RowBlock(5);
+			rBlock.addTry(x1, y1, z1);
+			bRows.add(rBlock);
 		}
 	}
 
 	private class RowBlock {
-		public int last_change = 0;
+		public List<CBlock> Blocks;
 		public int acceptedRange = 5;
-		public Integer[] last_block;
-
-		// Blocks< Block[PlayersInRange, BlockPosition(x,y,z)] >
-		public List<HashMap<String[], Integer[]>> Rblocks;
+		public CBlock last_block;
 
 		public RowBlock(int acceptedRange_) {
-			Rblocks = new ArrayList<HashMap<String[], Integer[]>>();
+			Blocks = new ArrayList();
 			acceptedRange = acceptedRange_;
 		}
 
 		public Map<String, Integer> getInRangePlayers() {
-			List<String> inRangePlayers = new ArrayList();
-			HashMap<String, Integer> possiblePlayers = new HashMap();
+			HashMap<String, Integer> possiblePlayers = new HashMap<String, Integer>();
 
-			for (HashMap<String[], Integer[]> block : Rblocks) { // GetBlock
-				for (String[] playersName : block.keySet()) { // Get Names
-					for (String playerName : playersName) { // Get every name
-
-						if (!possiblePlayers.containsKey(playerName)) {
-							possiblePlayers.put(playerName, 1);
-						} else {
-							possiblePlayers.put(playerName, possiblePlayers.get(playerName) + 1);
-						}
+			for (int i = 0; i < Blocks.size(); i++) {
+				CBlock block = Blocks.get(i);
+				for (String player : block.playersInRange) {
+					if (!possiblePlayers.containsKey(player)) {
+						possiblePlayers.put(player, 1);
+					} else {
+						possiblePlayers.replace(player, possiblePlayers.get(player) + 1);
 					}
 				}
 			}
-			return possiblePlayers;
-			// return Utiles.sortByValue(possiblePlayers);
+
+			return Utiles.sortByComparator(possiblePlayers, false);
 		}
 
-		public boolean addTry(int x, int y, int z) {
+		public boolean addTry(double x, double y, double z) {
 			try {
-				/*
-				 * // Checking the Row if it has been changed before... for (HashMap<String[],
-				 * Integer[]> Block : Rblocks) { for (Entry<String[], Integer[]> entry :
-				 * Block.entrySet()) { String[] playersInRange = entry.getKey(); Integer[]
-				 * BlocksPos = entry.getValue();
-				 * 
-				 * if (x == BlocksPos[0] && y == BlocksPos[1] && z == BlocksPos[2]) return
-				 * false; } }
-				 */
-				if (Rblocks.size() != 0) {
-					if (Utiles.Distance3D(last_block[0], last_block[1], last_block[2], x, y, z) > acceptedRange) {
+				if (Blocks.size() != 0) {
+					if (Utiles.Distance3D(last_block.X, last_block.Y, last_block.Z, x, y, z) > acceptedRange) {
 						return false;
 					}
 				}
-				String[] PlayersInRange = Main.playerListener.getPlayersInRange(acceptedRange, x, y, z);
-				Integer[] BlockPos = new Integer[] { x, y, z };
+				List<String> playersInRange = Main.playerListener.getPlayersInRange(acceptedRange, x, y, z);
 
-				HashMap<String[], Integer[]> newBlock = new HashMap();
-				newBlock.put(PlayersInRange, BlockPos);
+				CBlock cblock = new CBlock(x, y, z);
+				cblock.playersInRange = playersInRange;
 
-				Rblocks.add(newBlock);
-
-				last_block = BlockPos;
-				last_change = Utiles.getUnixTime();
+				last_block = cblock;
+				Blocks.add(cblock);
 			} catch (Exception e) {
 				Utiles.debug(e);
 				return false;
 			}
 			return false;
+		}
+	}
+
+	class CBlock {
+		public double X;
+		public double Y;
+		public double Z;
+
+		public double time;
+		public List<String> playersInRange;
+
+		public CBlock(double x, double y, double z) {
+			X = x;
+			Y = y;
+			Z = z;
+
+			time = System.currentTimeMillis();
 		}
 	}
 }
