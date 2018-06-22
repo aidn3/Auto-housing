@@ -70,7 +70,7 @@ public class Command extends CommandBase {
 						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
 						return;
 					}
-					showMessage(getCommandName() + "-Reminder will send message every " + timer + " minute", sender);
+					showMessage(getCommandName() + "-Reminder will send message every " + timer + " minute(s)", sender);
 					return;
 				} else if (args[1].equals("on")) {
 					Main.settings.set("reminder", "ON");

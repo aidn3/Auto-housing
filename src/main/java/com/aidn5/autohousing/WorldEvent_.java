@@ -5,14 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IWorldAccess;
 
-public class WorldEvent implements IWorldAccess {
-
-	@Override
-	public void markBlockForUpdate(BlockPos pos) {
-		// TODO Auto-generated method stub
-		pos.getX();
-
-	}
+public class WorldEvent_ implements IWorldAccess {
 
 	@Override
 	public void notifyLightSet(BlockPos pos) {
@@ -78,6 +71,12 @@ public class WorldEvent implements IWorldAccess {
 
 	@Override
 	public void sendBlockBreakProgress(int breakerId, BlockPos pos, int progress) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void markBlockForUpdate(BlockPos pos) {
 		// TODO Auto-generated method stub
 
 	}

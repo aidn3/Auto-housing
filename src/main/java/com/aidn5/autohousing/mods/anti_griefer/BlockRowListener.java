@@ -29,7 +29,7 @@ public class BlockRowListener {
 		}
 	}
 
-	class RowBlock {
+	private class RowBlock {
 		public int last_change = 0;
 		public int acceptedRange = 5;
 		public Integer[] last_block;
