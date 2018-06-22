@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.aidn5.autohousing.Common;
-import com.aidn5.autohousing.Config;
-import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,8 +13,8 @@ import net.minecraft.entity.player.EntityPlayer;
 public class PlayerListener {
 	public boolean start = true;
 
-	private Thread background;
-	private Runnable backgroundprocess;
+	private Thread thread;
+	private Runnable runnable;
 
 	private HashMap<String, double[]> playersPos;
 
@@ -25,8 +23,7 @@ public class PlayerListener {
 		prepare();
 	}
 
-	public String[] getPlayersInRange(int range, int x, int y, int z) {
-		// TODO getPlayerInRange competiable with performence meter
+	public List<String> getPlayersInRange(int range, double x, double y, double z) {
 		List<String> playersInRange = new ArrayList();
 
 		if (Main.performence == 3) {
@@ -37,10 +34,9 @@ public class PlayerListener {
 					playersInRange.add(entityPlayer.getName());
 				}
 			}
-			return (String[]) playersInRange.toArray();
 
 		} else if (Main.performence == 2) {
-			if (playersPos == null || playersPos.isEmpty()) return new String[] {};
+			if (playersPos == null || playersPos.isEmpty()) return new ArrayList();
 
 			HashMap<String, double[]> playersPos1 = (HashMap<String, double[]>) playersPos.clone();
 			for (Entry<String, double[]> entry : playersPos1.entrySet()) {
@@ -51,24 +47,23 @@ public class PlayerListener {
 				}
 			}
 		}
-		return new String[] {};
+		return playersInRange;
 	}
 
 	private void prepare() {
-		backgroundprocess = new Runnable() {
+		runnable = new Runnable() {
 			@Override
 			public void run() {
 				Listener();
 			}
 		};
-		background = new Thread(backgroundprocess);
+		thread = new Thread(runnable);
 	}
 
 	private void Listener() {
-		int ErrorNr = 0;
 		try {
 			while (true) {
-				Thread.sleep(Config.refresh_Speed);
+				Thread.sleep(1000);
 				if (Main.performence == 2) {
 					HashMap<String, double[]> playersPos1 = new HashMap();
 					List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
@@ -81,13 +76,8 @@ public class PlayerListener {
 				}
 			}
 		} catch (Exception e) {
-			ErrorNr++;
 			Utiles.debug(e);
 		}
-		if (ErrorNr > 10) {
-			Message.showMessage(Common.language.get("THREAD_ERR", ""));
-		} else {
-			Listener();
-		}
+		Listener();
 	}
 }
