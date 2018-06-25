@@ -1,5 +1,6 @@
 package com.aidn5.autohousing;
 
+import com.aidn5.autohousing.main.AutoUpdater;
 import com.aidn5.autohousing.services.CommandHandler;
 import com.aidn5.autohousing.services.InternetHandler;
 import com.aidn5.autohousing.services.SettingsHandler;
@@ -14,12 +15,15 @@ public class Common {
 	static public boolean autoReconnect = false;
 	static public boolean onHypixel = false;
 	public static boolean onHousing = false;
+
+	public static String[] test_msgs = new String[] { "aidn3 entered the world" };
 	public static String master = "username";
 
 	// shared methods
 	static public Minecraft mc; // Save minecraft object for later use; better performence
 
 	// Services
+	static public AutoUpdater autoUpdater; // AutoUpdater
 	static public CommandHandler commandHandler; // third party to send command instead of directly
 	static public InternetHandler internetHandler; // to requesting data from url with callback
 

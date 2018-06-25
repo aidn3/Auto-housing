@@ -26,7 +26,11 @@ public class MrBrain {
 		Common.master = Common.mc.getSession().getUsername();
 		Common.commandHandler = new CommandHandler();
 		Common.internetHandler = new InternetHandler();
+		Common.autoUpdater = new AutoUpdater();
 		manager = new Manager();
+
+		Common.autoUpdater.Update(true);
+		Common.autoUpdater.Update(false);
 
 		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.start();
 		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.start();

@@ -2,12 +2,15 @@ package com.aidn5.autohousing;
 
 public class Config {
 
-	// mod settings
-	public static boolean debug_mode = false;
+	// Mod settings
+	public static boolean debug_mode = true;
 	public static int cmd_timerS = 5000;
 	public static int cmd_timerF = 2000;
 	public static int refresh_Speed = 100;
+	public static String URL_UPDATER = "http://bit.ly/asd";
 
+	// Activated plug-ins
+	public static boolean HMod = true;
 	public static boolean HPromote = true;
 	public static boolean HSaver = true;
 	public static boolean HGriefer = false;

@@ -1,5 +1,6 @@
 package com.aidn5.autohousing.utiles;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -8,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.aidn5.autohousing.Config;
+import com.google.gson.JsonArray;
 
 public class Utiles {
 	static public void debug(String data) {
@@ -23,6 +27,25 @@ public class Utiles {
 		e.printStackTrace();
 	}
 
+	static public String Base64Decode(String string) {
+		try {
+			byte[] decodedBytes = Base64.decodeBase64(string.getBytes());
+			return new String(decodedBytes);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	static public String Base64Encode(String string) {
+		try {
+			byte[] encodedBytes = Base64.encodeBase64(string.getBytes());
+			return new String(encodedBytes);
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
 	static public int getUnixTime() {
 		return (int) (System.currentTimeMillis() / 1000L);
 	}
@@ -35,16 +58,19 @@ public class Utiles {
 		return Math.sqrt(xf + yf + zf);
 	}
 
-	/*
-	 * public static <K, V extends Comparable<? super V>> Map<K, V>
-	 * sortByValue(Map<K, V> map) { List<Entry<K, V>> list = new
-	 * ArrayList(map.entrySet()); list.sort(Entry.comparingByValue());
-	 * 
-	 * Map<K, V> result = new LinkedHashMap(); for (Entry<K, V> entry : list) {
-	 * result.put(entry.getKey(), entry.getValue()); }
-	 * 
-	 * return result; }
-	 */
+	public static String[] JsonArrayToString(JsonArray jsonArray) {
+		if (jsonArray == null) return new String[] {};
+
+		List<String> arrayList = new ArrayList<String>();
+
+		for (int i = 0; i < jsonArray.size(); i++) {
+			arrayList.add(jsonArray.get(i).getAsString());
+		}
+
+		String[] ArrayStr = new String[arrayList.size()];
+		return arrayList.toArray(ArrayStr);
+	}
+
 	static public Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap, final boolean order) {
 		List<Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(unsortMap.entrySet());
 

@@ -28,7 +28,7 @@ public class InternetHandler {
 			URLConnection urlConnection = url.openConnection();
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
-			String inputLine;
+			String inputLine = "";
 			while ((inputLine = bufferedReader.readLine()) != null)
 				response.append(inputLine);
 
