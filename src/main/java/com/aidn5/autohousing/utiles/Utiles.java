@@ -71,6 +71,12 @@ public class Utiles {
 		return arrayList.toArray(ArrayStr);
 	}
 
+	static public String[] ListToArray(List<String> list) {
+		String[] ArrayStr = new String[list.size()];
+		return list.toArray(ArrayStr);
+
+	}
+
 	static public Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap, final boolean order) {
 		List<Entry<String, Integer>> list = new LinkedList<Entry<String, Integer>>(unsortMap.entrySet());
 
