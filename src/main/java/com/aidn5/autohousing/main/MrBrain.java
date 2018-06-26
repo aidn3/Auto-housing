@@ -31,11 +31,11 @@ public class MrBrain {
 			return;
 		}
 
+		Common.master = Common.mc.getSession().getUsername();
 		Common.language = new SettingsHandler("assets/lang/en.txt", true);
 		Common.main_settings = new SettingsHandler("Main");
 		Common.friends = new SettingsHandler("friends");
 
-		Common.master = Common.mc.getSession().getUsername();
 		Common.commandHandler = new CommandHandler();
 		manager = new Manager();
 
