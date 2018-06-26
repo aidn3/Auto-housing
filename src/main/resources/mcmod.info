@@ -1,7 +1,7 @@
 [
 {
   "modid": "AutoHousing",
-  "name": "Auto housing promote [BETA]",
+  "name": "Auto housing [BETA]",
   "description": "Automating [Owner] and [Co-Owner] jobs from giving [Rank] after completing a parkour course till giving the opportunity to guests to save the location for later visit",
   
   "version": "0.3.3",
