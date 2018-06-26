@@ -4,9 +4,12 @@ public class Config {
 
 	// Mod settings
 	public static boolean debug_mode = true;
+
 	public static int cmd_timerS = 5000;
 	public static int cmd_timerF = 2000;
 	public static int refresh_Speed = 100;
+
+	public static int NEW_VERSION = 0;
 	public static String URL_UPDATER = "http://aydin.000webhostapp.com/service/mod-auto-housing/config.php";
 
 	// Activated plug-ins
@@ -21,8 +24,8 @@ public class Config {
 	public static String[] OnAutoReconnectStr = new String[] { "exception occurred in your connection" };
 
 	// Mod information
-	public final static String MOD_NAME = "Auto Housing";
-	public final static String NAME = "AutoHousing";
+	public final static String MOD_NAME = "Auto housing [BETA]";
+	public final static String NAME = "autohousing";
 	public final static String VERSION = "0.3.3";
 	public final static String AUTHOR = "aidn5";
 }
