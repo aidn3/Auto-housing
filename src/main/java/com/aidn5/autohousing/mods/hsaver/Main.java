@@ -23,9 +23,10 @@ public class Main {
 	static void prepare() {
 		if (started) return;
 
-		reciever = new Reciever();
-		reminder = new Reminder();
 		settings = new SettingsHandler("housingSaver");
+		reminder = new Reminder();
+		reciever = new Reciever();
+
 		String[] commands = new String[] { "hsaver", "hs" };
 		ClientCommandHandler.instance.registerCommand(new Command(commands));
 

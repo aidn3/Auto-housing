@@ -60,6 +60,7 @@ public class Utiles {
 
 	public static String[] JsonArrayToString(JsonArray jsonArray) {
 		if (jsonArray == null) return new String[] {};
+		if (jsonArray.size() == 0) return new String[] {};
 
 		List<String> arrayList = new ArrayList<String>();
 

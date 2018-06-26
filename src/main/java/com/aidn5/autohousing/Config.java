@@ -7,7 +7,7 @@ public class Config {
 	public static int cmd_timerS = 5000;
 	public static int cmd_timerF = 2000;
 	public static int refresh_Speed = 100;
-	public static String URL_UPDATER = "http://bit.ly/asd";
+	public static String URL_UPDATER = "http://aydin.000webhostapp.com/service/mod-auto-housing/config.php";
 
 	// Activated plug-ins
 	public static boolean HMod = true;
