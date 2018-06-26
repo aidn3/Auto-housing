@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
-@Mod(modid = Config.MOD_NAME, version = Config.VERSION)
+@Mod(modid = Config.MOD_NAME, version = Config.VERSION, name = Config.NAME)
 
 public class EventsRegister {
 	private MrBrain mrBrain;
