@@ -1,4 +1,4 @@
-package com.aidn5.autohousing.services;
+package com.aidn5.autohousing.main;
 
 import java.util.HashMap;
 
@@ -50,17 +50,23 @@ public class Manager {
 				return true;
 			}
 		}
+		Utiles.debug("AUTO CON0");
 		if (Common.autoReconnect) {
+			Utiles.debug("AUTO CON1");
 			for (String possible : Config.OnAutoReconnectStr) {
+				Utiles.debug("AUTO CON2");
 				if (message.contains(possible)) {
+					Utiles.debug("AUTO CON3");
 					Message.showMessage("Sending you back to your house in 5 seconds...");
 					(new Thread(new Runnable() {
 						@Override
 						public void run() {
 							try {
+								Utiles.debug("AUTO CON4");
 								Thread.sleep(5000);
 								Common.commandHandler.sendSlow("/home");
 							} catch (Exception e) {
+								Utiles.debug("AUTO CON5");
 								Utiles.debug(e);
 							}
 

@@ -5,7 +5,6 @@ import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.services.CommandHandler;
 import com.aidn5.autohousing.services.InternetHandler;
 import com.aidn5.autohousing.services.InternetHandler.EventListener;
-import com.aidn5.autohousing.services.Manager;
 import com.aidn5.autohousing.services.SettingsHandler;
 import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;

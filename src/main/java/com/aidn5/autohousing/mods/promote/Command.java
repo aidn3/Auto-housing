@@ -48,7 +48,7 @@ public class Command extends CommandBase {
 			} else if (args[0].equals("p") || args[0].equals("parkour")) {
 				promoteChange("ap-pk", args[1], sender);
 				return;
-			} else if (args[0].equals("j") || args[0].equals("all")) {
+			} else if (args[0].equals("a") || args[0].equals("all")) {
 				promoteChange("ap-jn", args[1], sender);
 				return;
 			} else if (args[0].equals("f") || args[0].equals("friends")) {

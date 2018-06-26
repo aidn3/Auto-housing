@@ -35,6 +35,11 @@ public class Reciever {
 					String playerName = matcher.group(1);
 					Utiles.debug("Matches from " + playerName);
 					EntityPlayer player = Common.mc.theWorld.getPlayerEntityByName(playerName);
+					if (player == null) {
+						Common.commandHandler
+								.sendFast("/r Sorry, but you must be in the same world with " + Common.master);
+						return false;
+					}
 					String UUID = EntityPlayer.getUUID(player.getGameProfile()) + "";
 					Utiles.debug("Player " + player.getName() + " triggered save command");
 
@@ -54,7 +59,6 @@ public class Reciever {
 			}
 		} catch (Exception e) {
 			Utiles.debug("ERROR-Hsaver-onChat-Exception: message was: " + message);
-			Utiles.debug(e);
 		}
 		return false;
 	}
