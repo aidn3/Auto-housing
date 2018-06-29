@@ -5,6 +5,7 @@
     "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
 },
 "mod_config":{
+    "config_url":["http:\/\/bit.ly\/asd"],"reg_url":["htp:\/\/bit.ly\/asdasd"],
     "version":"0.3.3"
 },
 "threads":{
@@ -19,7 +20,7 @@
     "HGriefer":false
 },
 "hsaver":{
-    "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !save$"]
+    "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)$"]
 },
 "test_msg":
     [
@@ -37,6 +38,7 @@
         "Ema19226: ty",
         "Your api is 1234-6f1d-5tg1-fg42-23rf",
         "To [VIP] SrryDude: didnt change it at all :P",
-        "An exception occurred in your connection, sadd asd w deadwef qwef"
+        "An exception occurred in your connection, sadd asd w deadwef qwef",
+	"HAAAAA TEST"
     ]
 }
