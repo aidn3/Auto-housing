@@ -57,21 +57,16 @@ public class AutoUpdater {
 
 	private void process(String data) {
 		try {
-			String decoded = "";
 			if (data != null && !data.isEmpty()) {
+				JsonElement jsonElement = new JsonParser().parse(data);
 
-				decoded = Utiles.Base64Decode(data);
-				if (decoded != null && !decoded.isEmpty()) {
+				if (jsonElement != null) {
+					retrivedSettings = jsonElement.getAsJsonObject();
 
-					JsonElement jsonElement = new JsonParser().parse(decoded);
-					if (jsonElement != null) {
-
-						retrivedSettings = jsonElement.getAsJsonObject();
-
-						SaveCacheSettings(decoded);
-						Utiles.debug("Save DATA AS CACHED");
-					}
+					SaveCacheSettings(data);
+					Utiles.debug("Save DATA AS CACHE");
 				}
+
 			}
 
 			JsonObject jsonObject = getSettings();

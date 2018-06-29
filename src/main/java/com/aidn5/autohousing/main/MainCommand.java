@@ -6,6 +6,7 @@ import java.util.List;
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -34,7 +35,20 @@ public class MainCommand extends CommandBase {
 			String[] orginArgs = args.clone();
 
 			if (length == 0) {// No arguments; show usage
-				getCommandUsage(sender);
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(Config.refresh_Speed);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						MainGui main = new MainGui(Minecraft.getMinecraft());
+						Minecraft.getMinecraft().displayGuiScreen(main);
+
+					}
+				}).start();
 				return;
 			}
 
@@ -42,25 +56,7 @@ public class MainCommand extends CommandBase {
 				args[i] = args[i].toLowerCase(); // make it "unvirsal"
 			}
 
-			if (args[0].equals("forcemode")) {
-				if (Common.onForce) {
-					Common.onForce = false;
-					showMessage(getCommandName() + " ForceMode Toggled off", sender);
-				} else {
-					Common.onForce = true;
-					showMessage(getCommandName() + " ForceMode Toggled on", sender);
-				}
-				return;
-			} else if (args[0].equals("autoreconnect")) {
-				if (Common.autoReconnect) {
-					Common.autoReconnect = false;
-					showMessage(getCommandName() + " autoReconnect Toggled off", sender);
-				} else {
-					Common.autoReconnect = true;
-					showMessage(getCommandName() + " autoReconnect Toggled on", sender);
-				}
-				return;
-			} else if (args[0].equals("debugmode")) {
+			if (args[0].equals("debugmode")) {
 				if (Config.debug_mode) {
 					Config.debug_mode = false;
 					showMessage(getCommandName() + " DebugMode Toggled off", sender);
@@ -68,6 +64,11 @@ public class MainCommand extends CommandBase {
 					Config.debug_mode = true;
 					showMessage(getCommandName() + " DebugMode Toggled on", sender);
 				}
+				return;
+			} else if (args[0].equals("update")) {
+				showMessage(getCommandName() + " Updating the settings to the latest...", sender);
+				Common.autoUpdater.Update(false);
+
 				return;
 			} else if (args[0].equals("status")) {
 
@@ -110,8 +111,6 @@ public class MainCommand extends CommandBase {
 
 		if (length == 1) {
 			list.add("Status");
-			list.add("ForceMode");
-			list.add("autoReconnect");
 		}
 		return list;
 	}
@@ -130,8 +129,7 @@ public class MainCommand extends CommandBase {
 		String CMD_NAME = "/" + getCommandName() + " ";
 		showMessage(neutral + "--------------------", sender);
 		showMessage(secondary + Config.MOD_NAME, sender);
-		showMessage(primary + CMD_NAME + "ForceMode", sender);
-		showMessage(primary + CMD_NAME + "autoReconnect", sender);
+		showMessage(primary + CMD_NAME + "status", sender);
 
 		return "";
 	}

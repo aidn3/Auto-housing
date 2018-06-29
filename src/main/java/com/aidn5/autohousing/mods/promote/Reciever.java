@@ -61,10 +61,10 @@ public class Reciever {
 			if (words[0].contains("[")) name = words[1]; // It means the player has rank
 			String level = null;
 
-			if (!ap_jn.equals("OFF") && message.contains("entered the world")) {
+			if (!ap_jn.toLowerCase().equals("off") && message.contains("entered the world")) {
 				reason = "JoinTheWorld";
 				level = ap_jn;
-			} else if (!ap_pk.equals("OFF") && message.contains("completed the parkour in")) {
+			} else if (!ap_pk.toLowerCase().equals("off") && message.contains("completed the parkour in")) {
 				reason = "FinishedTheParkour";
 				level = ap_pk;
 			}

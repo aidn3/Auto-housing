@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
@@ -43,6 +44,7 @@ public class Main {
 
 	static public void onChat(String message) {
 		if (!started) return;
+		if (!Config.HSaver) return;
 		if (!Common.checkHousing()) return;
 		reciever.onChat(message);
 	}

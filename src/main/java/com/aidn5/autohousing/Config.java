@@ -11,6 +11,8 @@ public class Config {
 
 	public static int NEW_VERSION = 0;
 	public static String URL_UPDATER = "https://raw.githubusercontent.com/aidn3/Auto-housing/master/update.json";
+	// public static String URL_UPDATER =
+	// "http://localhost/service/mod-auto-housing/update.json";
 
 	// Activated plug-ins
 	public static boolean HMod = true;
@@ -26,6 +28,6 @@ public class Config {
 	// Mod information
 	public final static String MOD_NAME = "Auto housing [BETA]";
 	public final static String NAME = "autohousing";
-	public final static String VERSION = "0.3.3";
+	public final static String VERSION = "0.4";
 	public final static String AUTHOR = "aidn5";
 }

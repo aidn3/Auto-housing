@@ -7,6 +7,7 @@ import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.utiles.Utiles;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -36,7 +37,20 @@ public class Command extends CommandBase {
 			String[] orginArgs = args.clone();
 
 			if (length == 0) {// No arguments; show usage
-				getCommandUsage(sender);
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(Config.refresh_Speed);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						MainGui main = new MainGui(Minecraft.getMinecraft());
+						Minecraft.getMinecraft().displayGuiScreen(main);
+
+					}
+				}).start();
 				return;
 			}
 
@@ -44,41 +58,15 @@ public class Command extends CommandBase {
 				args[i] = args[i].toLowerCase(); // make it "unvirsal"
 			}
 
-			if (args[0].equals("on")) {
-				Main.settings.set("hsaver-toggled", "True");
-				showMessage(getCommandName() + " Toggled on", sender);
-				return;
-			} else if (args[0].equals("off")) {
-				Main.settings.set("hsaver-toggled", "False");
-				showMessage(getCommandName() + " Toggled off", sender);
-				return;
-
-			} else if (args[0].equals("resetall")) {
-				Main.settings.clear();
-				showMessage(Common.language.get("RESET_SET", "") + getCommandName(), sender);
-				if (!Main.settings.SaveUserSettings()) {
-					showError(Common.language.get("SET_SAVE_ERR", ""), sender);
-					return;
-				}
-				return;
-
-			} else if (args[0].equals("reminder")) {
+			if (args[0].equals("reminder")) {
 				if (args[1].equals("every")) {
 					int timer = Integer.valueOf(args[2]);
 					if (timer < 1) throw new Exception("");
-					if (!Main.settings.set("reminder-timer", String.valueOf(timer))) {
+					if (!Common.main_settings.set("hsaver-reminder-timer", String.valueOf(timer))) {
 						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
 						return;
 					}
 					showMessage(getCommandName() + "-Reminder will send message every " + timer + " minute(s)", sender);
-					return;
-				} else if (args[1].equals("on")) {
-					Main.settings.set("reminder", "ON");
-					showMessage(getCommandName() + "-Reminder Toggled on", sender);
-					return;
-				} else if (args[1].equals("off")) {
-					Main.settings.set("reminder", "OFF");
-					showMessage(getCommandName() + "-Reminder Toggled off", sender);
 					return;
 				}
 			} else if (args[0].equals("load")) {
@@ -163,8 +151,6 @@ public class Command extends CommandBase {
 					list.add(player.getName());
 				}
 			} else if (args[0].equals("reminder")) {
-				list.add("on");
-				list.add("off");
 				list.add("every");
 			}
 		}
@@ -186,12 +172,10 @@ public class Command extends CommandBase {
 		String CMD_NAME = "/" + getCommandName() + " ";
 		showMessage(neutral + "--------------------", sender);
 		showMessage(secondary + Config.MOD_NAME
-				+ (Boolean.valueOf(Main.settings.get("hsaver-toggled", "False")) ? " (Toggled)" : ""), sender);
-		showMessage(primary + CMD_NAME + "<off,on>", sender);
-		showMessage(primary + CMD_NAME + "resetAll", sender);
+				+ (Boolean.valueOf(Common.main_settings.get("hsaver-toggled", "ON").equals("ON")) ? " (Toggled)" : ""),
+				sender);
 		showMessage(primary + CMD_NAME + "load <username>", sender);
 		showMessage(primary + CMD_NAME + "save <username>", sender);
-		showMessage(primary + CMD_NAME + "reminder <on/off>", sender);
 		showMessage(primary + CMD_NAME + "reminder every <time(in minutes)>", sender);
 
 		return "";

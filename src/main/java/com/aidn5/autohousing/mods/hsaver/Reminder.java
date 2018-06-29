@@ -1,6 +1,7 @@
 package com.aidn5.autohousing.mods.hsaver;
 
 import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.utiles.Utiles;
 
 public class Reminder {
@@ -22,9 +23,12 @@ public class Reminder {
 	private void sendNoti() {
 		while (true) {
 			try {
-				Thread.sleep(Integer.valueOf(Main.settings.get("reminder-timer", "10")) * 60 * 1000);
-				if (Main.settings.get("reminder", "ON").equals("ON") && Common.checkHousing()) {
-					Common.commandHandler.sendFast(Common.language.get("REMIND_SAVE", ""));
+				Thread.sleep(Integer.valueOf(Common.main_settings.get("hsaver-reminder-timer", "10")) * 60 * 1000);
+				if (Config.HSaver) {
+					if (Common.main_settings.get("hsaver-reminder-toggled", "ON").equals("ON")
+							&& Common.checkHousing()) {
+						Common.commandHandler.sendFast(Common.language.get("REMIND_SAVE", ""));
+					}
 				}
 			} catch (Exception e) {
 				Utiles.debug(e);

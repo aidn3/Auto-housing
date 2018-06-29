@@ -14,7 +14,7 @@ public class Reciever {
 	public void onChat(String message) {
 		if (message == null) return;
 		if (!Common.onForce) {
-			if (!Main.settings.get("hsaver-toggled", "True").equals("True")) {
+			if (!Common.main_settings.get("hsaver-reminder-toggled", "ON").equals("ON")) {
 				Utiles.debug("hsaver: No onForce; Exit");
 				return;
 			}

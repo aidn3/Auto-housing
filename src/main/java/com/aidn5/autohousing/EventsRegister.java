@@ -5,6 +5,8 @@ import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -12,8 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
-@Mod(modid = Config.MOD_NAME, version = Config.VERSION, name = Config.NAME)
-
+@Mod(modid = Config.MOD_NAME, version = Config.VERSION, name = Config.NAME, clientSideOnly = true)
 public class EventsRegister {
 	private MrBrain mrBrain;
 
@@ -29,6 +30,12 @@ public class EventsRegister {
 	@SubscribeEvent
 	public void onPlayerChatReceive(ClientChatReceivedEvent event) {
 		mrBrain.getMessage(event);
+	}
+
+	@SubscribeEvent
+	public void onRenderGui(RenderGameOverlayEvent.Post event) {
+		if (event.type != ElementType.EXPERIENCE) return;
+
 	}
 
 	@SubscribeEvent
