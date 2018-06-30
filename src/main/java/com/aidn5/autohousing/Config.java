@@ -3,7 +3,7 @@ package com.aidn5.autohousing;
 public class Config {
 
 	// Mod settings
-	public static boolean debug_mode = true;
+	public static boolean debug_mode = false;
 
 	public static int cmd_timerS = 5000;
 	public static int cmd_timerF = 2000;
@@ -28,6 +28,6 @@ public class Config {
 	// Mod information
 	public final static String MOD_NAME = "Auto housing [BETA]";
 	public final static String NAME = "autohousing";
-	public final static String VERSION = "0.4";
+	public final static String VERSION = "0.4.1";
 	public final static String AUTHOR = "aidn5";
 }

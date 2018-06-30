@@ -4,6 +4,10 @@ import com.aidn5.autohousing.main.MrBrain;
 import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
@@ -45,6 +49,16 @@ public class EventsRegister {
 			Utiles.debug("playerLoggedIn(): Logged into network - " + mc.getCurrentServerData().serverIP);
 
 			boolean b = mc.getCurrentServerData().serverIP.toLowerCase().contains("hypixel.net");
+			if (b && Config.NEW_VERSION != 0) {
+				IChatComponent component = new ChatComponentText(
+						Config.MOD_NAME + ": New version is available to download");
+
+				ChatStyle style = new ChatStyle();
+				style.setColor(EnumChatFormatting.YELLOW);
+				component.setChatStyle(style);
+
+				Common.mc.thePlayer.addChatMessage(component);
+			}
 			Common.onHypixel = b;
 		} catch (Exception ignore) {}
 	}

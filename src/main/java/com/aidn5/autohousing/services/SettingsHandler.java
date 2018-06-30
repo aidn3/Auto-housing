@@ -119,8 +119,12 @@ public class SettingsHandler {
 			}
 			if (!dir.isDirectory()) throw new Exception("PATH is NOT DIR");
 			File settings_file = new File(LOCAL_SET);
-			if (!settings_file.exists() && settings_file.createNewFile())
-				throw new Exception("Cannot create settings file for " + settings_file.getName());
+			if (!settings_file.exists()) {
+				if (!settings_file.createNewFile()) {
+
+					throw new Exception("Cannot create settings file for " + settings_file.getName());
+				}
+			}
 		} catch (Exception e) {
 			if (Config.debug_mode) {
 				e.printStackTrace();

@@ -6,7 +6,7 @@
 },
 "mod_config":{
     "config_url":["http:\/\/bit.ly\/asd"],"reg_url":["htp:\/\/bit.ly\/asdasd"],
-    "version":"0.3.3"
+    "version":"0.4.1"
 },
 "threads":{
     "cmd_timerS":5000,

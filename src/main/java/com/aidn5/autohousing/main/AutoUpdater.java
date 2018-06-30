@@ -12,6 +12,7 @@ import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.mods.hsaver.Main;
 import com.aidn5.autohousing.services.InternetHandler.EventListener;
+import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -157,15 +158,9 @@ public class AutoUpdater {
 	class Processer {
 		public boolean msg_detector(JsonObject jsonObject, boolean firstTime) {
 			try {
-				Utiles.debug(jsonObject.toString());
-				Utiles.debug(jsonObject.toString());
 				JsonArray OnHousingStrJ = jsonObject.getAsJsonArray("OnHousingStr");
 				JsonArray OnNotHousingStrJ = jsonObject.getAsJsonArray("OnNotHousingStr");
 				JsonArray OnAutoReconnectStrJ = jsonObject.getAsJsonArray("OnAutoReconnectStr");
-
-				if (OnHousingStrJ == null) Utiles.debug("OnHousingStrJ IS NULL");
-				if (OnNotHousingStrJ == null) Utiles.debug("OnNotHousingStrJ IS NULL");
-				if (OnAutoReconnectStrJ == null) Utiles.debug("OnAutoReconnectStrJ IS NULL");
 
 				String[] OnHousingStr = Utiles.JsonArrayToString(OnHousingStrJ);
 				String[] OnNotHousingStr = Utiles.JsonArrayToString(OnNotHousingStrJ);
@@ -219,7 +214,6 @@ public class AutoUpdater {
 				JsonArray jsonArray = jsonObject.getAsJsonArray("regex_detector");
 
 				for (int i = 0; i < jsonArray.size(); i++) {
-					Utiles.debug(jsonArray.get(i).getAsString());
 					try {
 						String pattern = jsonArray.get(i).getAsString();
 						Pattern new_regex = Pattern.compile(pattern);
@@ -247,8 +241,10 @@ public class AutoUpdater {
 			try {
 				int version_new = Integer.valueOf(jsonObject.get("version").getAsString().replace(".", ""));
 				int version_old = Integer.valueOf(Config.VERSION.replace(".", ""));
+
 				if (version_old < version_new) {
 					Config.NEW_VERSION = version_new;
+					Message.showMessage(Config.MOD_NAME + ": New version is available to download");
 				}
 				return true;
 			} catch (Exception igonre) {

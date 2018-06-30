@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.services.GuiHandler;
-import com.aidn5.autohousing.utiles.Utiles;
+import com.aidn5.autohousing.utiles.Message;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -20,7 +20,6 @@ public class MainGui extends GuiHandler {
 
 	@Override
 	public void initGui() {
-		Utiles.debug("START MainGui.class");
 		initGui_();
 		super.initGui();
 	}
@@ -28,7 +27,7 @@ public class MainGui extends GuiHandler {
 	public void initGui_() {
 		buttonList = new ArrayList();
 		buttonList.add(new GuiButton(1, width / 2 - 70, height / 2 - 50, 140, 20,
-				"AutoConnect" + checkStatus(Common.autoReconnect)));
+				"autoReconnect" + checkStatus(Common.autoReconnect)));
 		buttonList.add(
 				new GuiButton(2, width / 2 - 70, height / 2 - 28, 140, 20, "ForceMode" + checkStatus(Common.onForce)));
 
@@ -47,8 +46,10 @@ public class MainGui extends GuiHandler {
 		super.actionPerformed(button);
 		if (button.enabled) {
 			if (button.id == 1) {
-				Utiles.debug("FIRST ONE");
 				Common.autoReconnect = !Common.autoReconnect;
+				if (!Common.main_settings.set("AutoReconnect", String.valueOf(Common.autoReconnect))) {
+					Message.showMessage(Common.language.get("SET_SAVE_ERR", ""));
+				}
 			} else if (button.id == 2) {
 				Common.onForce = !Common.onForce;
 			} else if (button.id == 3) {
