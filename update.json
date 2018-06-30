@@ -2,7 +2,7 @@
 "msg_detector":{
     "OnHousingStr":["Welcome to the Housing"," entered the world"],
     "OnNotHousingStr":["Sending you to"],
-    "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
+    "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb","isconnect occured in your connection, so you were put in the Housing Lobb"]
 },
 "mod_config":{
     "config_url":["http:\/\/bit.ly\/asd"],"reg_url":["htp:\/\/bit.ly\/asdasd"],
