@@ -32,3 +32,13 @@
 + Mod: Change PackageName
 + Mod: make folder "main" for some un-seperated classes
 
+#### 0.4.0 (GUI)
++ Have GUI/responsive
++ fix minor and major bugs
++ Fully supported for AutoUpdater
++ Change setting locations
+
+
+#### 0.4.1 (offical)
++ Fix minor bugs
++ Check for version updates
