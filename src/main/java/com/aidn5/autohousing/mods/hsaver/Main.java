@@ -34,6 +34,21 @@ public class Main {
 		started = true;
 	}
 
+	static void restart() {
+		if (started) {
+			started = false;
+
+			settings = new SettingsHandler("housingSaver");
+			reminder = new Reminder();
+			reciever = new Reciever();
+
+			started = true;
+
+		} else {
+			prepare();
+		}
+	}
+
 	static public void onChat(ClientChatReceivedEvent event) {
 		if (!started) return;
 		if (!Common.checkHousing()) return;
