@@ -27,7 +27,7 @@
     "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)"]
 },
 "hmessenger":{
-    "cookiethanker":["You received ([0-9]|[0-9][0-9]) cookie from (([A-Za-z0-9_]{1,32}))"],
+    "cookiethanker":["You received ([0-9]|[0-9][0-9]) (cookie|cookies) from (([A-Za-z0-9_]{1,32}))"],
     "autowelcomer":["([A-Za-z0-9_]{1,32}) entered the world"]
 },
 "test_msg":
