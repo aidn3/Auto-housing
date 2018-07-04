@@ -56,19 +56,6 @@ public class Command extends CommandBase {
 			for (int i = 0; i < length; i++) {
 				args[i] = args[i].toLowerCase(); // make it "unvirsal"
 			}
-
-			if (args[0].equals("reminder")) {
-				if (args[1].equals("every")) {
-					int timer = Integer.valueOf(args[2]);
-					if (timer < 1) throw new Exception("");
-					if (!Common.main_settings.set("hsaver-reminder-timer", String.valueOf(timer))) {
-						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
-						return;
-					}
-					showMessage(getCommandName() + "-Reminder will send message every " + timer + " minute(s)", sender);
-					return;
-				}
-			}
 		} catch (Exception e) {
 			Utiles.debug(e);
 		}
@@ -96,9 +83,6 @@ public class Command extends CommandBase {
 		int length = args.length;
 		List<String> list = new ArrayList();
 
-		if (length == 1) {
-			list.add("status");
-		}
 		return list;
 	}
 
@@ -109,20 +93,6 @@ public class Command extends CommandBase {
 
 	public boolean canSenderUseCommand(ICommandSender sender) {
 		return true;
-	}
-
-	@Override
-	public String getCommandUsage(ICommandSender sender) {
-		String CMD_NAME = "/" + getCommandName() + " ";
-		showMessage(neutral + "--------------------", sender);
-		showMessage(secondary + Config.MOD_NAME
-				+ (Boolean.valueOf(Common.main_settings.get("hsaver-toggled", "ON").equals("ON")) ? " (Toggled)" : ""),
-				sender);
-		showMessage(primary + CMD_NAME + "load <username>", sender);
-		showMessage(primary + CMD_NAME + "save <username>", sender);
-		showMessage(primary + CMD_NAME + "reminder every <time(in minutes)>", sender);
-
-		return "";
 	}
 
 	// Manage messages
@@ -139,6 +109,11 @@ public class Command extends CommandBase {
 	public void showError(String error, ICommandSender sender) {
 		showMessage(neutral + "--------------------", sender);
 		showMessage(EnumChatFormatting.RED + "Error: " + error, sender);
+	}
+
+	@Override
+	public String getCommandUsage(ICommandSender sender) {
+		return null;
 	}
 
 }
