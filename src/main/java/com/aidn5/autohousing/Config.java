@@ -16,6 +16,7 @@ public class Config {
 
 	// Activated plug-ins
 	public static boolean HMod = true;
+	public static boolean HMessenger = true;
 	public static boolean HPromote = true;
 	public static boolean HSaver = true;
 	public static boolean HGriefer = false;
