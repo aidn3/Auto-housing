@@ -9,7 +9,6 @@ import com.aidn5.autohousing.services.GuiHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 
 public class MainGui extends GuiHandler {
 	private List<List<String>> hoverText;
@@ -52,14 +51,15 @@ public class MainGui extends GuiHandler {
 
 		buttonList.add(new GuiButton(1, width / 2 - 70, height / 2 - 50, 140, 20,
 				"AutoWelcome: " + checkStatus(Common.main_settings.get("hmsg-autoWelcome", "ON").equals("ON"))));
-		hoverText.add(toolTipText(new String[] { "Reconnect to housing", "after getting kicked for connection" }));
+		hoverText.add(toolTipText(new String[] { "Welcomes anyone who joins" }));
 
 		buttonList.add(new GuiButton(2, width / 2 - 70, height / 2 - 28, 140, 20,
 				"CookiesRminder: " + checkStatus(Common.main_settings.get("hmsg-cookiesReminder", "ON").equals("ON"))));
+		hoverText.add(toolTipText(new String[] { "(Work in progress)", "Reminding people to give cookies" }));
 
 		buttonList.add(new GuiButton(3, width / 2 - 70, height / 2 - 6, 140, 20,
 				"CookiesThanks: " + checkStatus(Common.main_settings.get("hmsg-cookiesThanks", "ON").equals("ON"))));
-		labelList.add(new GuiLabel(fontRender, 100, 100, 100, 100, 100, 100));
+		hoverText.add(toolTipText(new String[] { "Thanks player for cookies" }));
 	}
 
 	@Override
