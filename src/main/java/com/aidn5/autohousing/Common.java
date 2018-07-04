@@ -39,6 +39,10 @@ public class Common {
 		Common.mc.thePlayer.sendChatMessage(command);
 	}
 
+	public static String Owner() {
+		return master;
+	}
+
 	public static boolean checkHousing() {
 		if (!Common.onForce) {
 			if (!Common.onHypixel || !Common.onHousing) {
