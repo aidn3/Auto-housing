@@ -2,6 +2,7 @@ package com.aidn5.autohousing.mods.anti_griefer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -17,17 +18,35 @@ public class BlockRowListener {
 
 	}
 
-	public void Listener(int x1, int y1, int z1) {
-		boolean added = false;
-
-		for (RowBlock rowBlock : bRows) {
-			if (rowBlock.addTry(x1, y1, z1)) added = true;
+	private void checkRows() {
+		try {
+			for (Iterator<RowBlock> iterator = bRows.iterator(); iterator.hasNext();) {
+				if ((iterator.next().last_block.time + 2000) < System.currentTimeMillis()) {
+					iterator.remove();
+				}
+			}
+		} catch (Exception e) {
+			Utiles.debug(e);
 		}
+	}
 
-		if (!added) {
-			RowBlock rBlock = new RowBlock(5);
-			rBlock.addTry(x1, y1, z1);
-			bRows.add(rBlock);
+	public void Listener(int x1, int y1, int z1) {
+		try {
+			boolean added = false;
+
+			for (RowBlock rowBlock : bRows) {
+				if (rowBlock != null) {
+					if (rowBlock.addTry(x1, y1, z1)) added = true;
+				}
+			}
+
+			if (!added) {
+				RowBlock rBlock = new RowBlock(5);
+				rBlock.addTry(x1, y1, z1);
+				bRows.add(rBlock);
+			}
+		} catch (Exception e) {
+			Utiles.debug(e);
 		}
 	}
 
