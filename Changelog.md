@@ -42,3 +42,9 @@
 #### 0.4.1 (offical)
 + Fix minor bugs
 + Check for version updates
+
+#### 0.5.0 (offical)
++ Fix bugs with commands, GUI, Recievers
++ Upgrade the GUI (TipTool, etc.)
++ added API detector (for futur use)
++ added "messenger"

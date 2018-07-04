@@ -11,11 +11,9 @@ public class Reciever {
 
 	public void onChat(String message) {
 		if (message == null) return;
-		if (!Common.onForce) {
-			if (!Common.main_settings.get("hmessenger-toggled", "ON").equals("ON")) {
-				Utiles.debug("hmessenger: No onForce; Exit");
-				return;
-			}
+		if (!Common.checkHousing()) {
+			Utiles.debug("hmessenger: Not in housing; Exit");
+			return;
 		}
 		Utiles.debug("HMesseger: checking it...");
 		if (Message.LegitMsg(message)) {
@@ -51,7 +49,7 @@ public class Reciever {
 		for (Pattern pattern : Main.cookiesThankerP) {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.find()) {
-				String string = "Thank {user} for {r} the {cookies} cookies :D";
+				String string = "Thanks {user} for {r} the {cookies} cookies :D";
 
 				string = string.replace("{cookies}", matcher.group(1));
 				string = string.replace("{user}", matcher.group(2));

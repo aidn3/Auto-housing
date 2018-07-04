@@ -1,5 +1,7 @@
 package com.aidn5.autohousing.utiles;
 
+import java.util.Random;
+
 import com.aidn5.autohousing.Common;
 
 import net.minecraft.util.ChatComponentText;
@@ -10,6 +12,7 @@ import net.minecraft.util.IChatComponent;
 public class Message {
 
 	// Check if it's from the server and not player
+	@Deprecated
 	static public boolean LegitMsg(String message) {
 		// Means a player said it in chat
 		if (message.split(": ").length > 1) return false;
@@ -30,6 +33,7 @@ public class Message {
 		Common.mc.thePlayer.addChatMessage(component);
 	}
 
+	@Deprecated
 	static public String getUsername(String message) {
 		String[] words = message.split("\\s+");
 		String name = words[0];
@@ -47,5 +51,29 @@ public class Message {
 		if (name.contains("§")) name = name.substring(0, name.length() - 2);
 
 		return name;
+	}
+
+	static public String stringChanger(String string) {
+
+		if (string.contains("{r}")) string = stringRandom(string);
+		string = string.replace("{master}", Common.master);
+		string = string.replace("{owner}", Common.Owner());
+
+		return string;
+	}
+
+	static public String stringRandom(String string) {
+		final String alphabet = "abcdefghijklmnopqrstuvwxyz" + "0123456789" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		final String specialChar = "!@#%^&*()_+=-/?.>,<\\";
+
+		final int N1 = alphabet.length();
+		final int N2 = specialChar.length();
+		Random r = new Random();
+
+		while (string.contains("{r}")) {
+			string = string.replaceFirst("\\{r\\}",
+					"[" + alphabet.charAt(r.nextInt(N2)) + alphabet.charAt(r.nextInt(N1)) + "]");
+		}
+		return string;
 	}
 }

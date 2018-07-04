@@ -74,6 +74,8 @@ public class MainCommand extends CommandBase {
 
 				showMessage(primary + "ForceMode: " + secondary + String.valueOf(Common.onForce), sender);
 				showMessage(primary + "autoReconnect: " + secondary + String.valueOf(Common.autoReconnect), sender);
+				showMessage(primary + "hypixel's api: " + secondary
+						+ Common.main_settings.get("api", "(You don't have one)"), sender);
 
 				if (Config.debug_mode) {
 					showMessage(primary + "DebugMode: " + secondary + String.valueOf(Config.debug_mode), sender);
@@ -81,6 +83,12 @@ public class MainCommand extends CommandBase {
 					showMessage(primary + "onHousing: " + secondary + String.valueOf(Common.onHousing), sender);
 				}
 				return;
+			} else if (args[0].equals("api")) {
+				if (args[1].length() != 36) {
+					showError("Invaild api", sender);
+					return;
+				}
+				Common.main_settings.set("api", args[1]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,6 +119,7 @@ public class MainCommand extends CommandBase {
 
 		if (length == 1) {
 			list.add("Status");
+			list.add("api");
 		}
 		return list;
 	}
@@ -130,6 +139,7 @@ public class MainCommand extends CommandBase {
 		showMessage(neutral + "--------------------", sender);
 		showMessage(secondary + Config.MOD_NAME, sender);
 		showMessage(primary + CMD_NAME + "status", sender);
+		showMessage(primary + CMD_NAME + "api <api>", sender);
 
 		return "";
 	}

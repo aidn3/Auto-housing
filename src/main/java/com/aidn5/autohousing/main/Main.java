@@ -14,14 +14,17 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.common.MinecraftForge;;
 
-public class MrBrain {
-	private Manager manager;
+public class Main {
+	static public Reciever reciever;
 
-	public void prepare() {
+	static public void prepare() {
 		Common.mc = Minecraft.getMinecraft();
 
 		Common.autoUpdater = new AutoUpdater();
 		Common.internetHandler = new InternetHandler();
+
+		Common.commandHandler = new CommandHandler();
+		reciever = new Reciever();
 
 		Common.autoUpdater.Update(true); // Load settings on offline mode
 		Common.autoUpdater.Update(false); // Try to load settings from the server
@@ -39,9 +42,7 @@ public class MrBrain {
 		Common.autoReconnect = Boolean
 				.parseBoolean(Common.main_settings.get("AutoReconnect", String.valueOf(Common.autoReconnect)));
 
-		Common.commandHandler = new CommandHandler();
-		manager = new Manager();
-
+		if (Config.HMessenger) com.aidn5.autohousing.mods.messenger.Main.start();
 		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.start();
 		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.start();
 		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.start();
@@ -54,7 +55,7 @@ public class MrBrain {
 		// FullTest();
 	};
 
-	public void FullTest() {
+	static public void FullTest() {
 		// API getter
 		Message.showMessage("Starting FullTest() for debuging...");
 
@@ -64,24 +65,27 @@ public class MrBrain {
 
 	}
 
-	public void getMessage(ClientChatReceivedEvent message) {
+	static public void getMessage(ClientChatReceivedEvent message) {
 		if (!Common.started) return;
 		if (Config.debug_mode && message.message.getUnformattedText().contains("TEST FULL")) {
 			FullTest();
 		}
 		String messageUn = message.message.getUnformattedText();
 		Utiles.debug(messageUn);
-		manager.onChat(messageUn);
+		reciever.onChat(messageUn);
+
+		if (Config.HMessenger) com.aidn5.autohousing.mods.messenger.Main.onChat(message);
 		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.onChat(message);
 		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.onChat(message);
 		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.onChat(message);
 	}
 
-	public void getMessage(String message) {
+	static public void getMessage(String message) {
 		if (!Common.started) return;
 
 		Message.showMessage(message);
-		manager.onChat(message);
+		reciever.onChat(message);
+		if (Config.HMessenger) com.aidn5.autohousing.mods.messenger.Main.onChat(message);
 		if (Config.HPromote) com.aidn5.autohousing.mods.promote.Main.onChat(message);
 		if (Config.HSaver) com.aidn5.autohousing.mods.hsaver.Main.onChat(message);
 		if (Config.HGriefer) com.aidn5.autohousing.mods.anti_griefer.Main.onChat(message);

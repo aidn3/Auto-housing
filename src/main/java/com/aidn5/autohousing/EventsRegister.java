@@ -1,6 +1,6 @@
 package com.aidn5.autohousing;
 
-import com.aidn5.autohousing.main.MrBrain;
+import com.aidn5.autohousing.main.Main;
 import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
@@ -20,20 +20,18 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 
 @Mod(modid = Config.MOD_NAME, version = Config.VERSION, name = Config.NAME, clientSideOnly = true)
 public class EventsRegister {
-	private MrBrain mrBrain;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		// FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
 		Utiles.debug("MOD STARTED");
-		mrBrain = new MrBrain();
-		mrBrain.prepare();
+		Main.prepare();
 	}
 
 	@SubscribeEvent
 	public void onPlayerChatReceive(ClientChatReceivedEvent event) {
-		mrBrain.getMessage(event);
+		Main.getMessage(event);
 	}
 
 	@SubscribeEvent

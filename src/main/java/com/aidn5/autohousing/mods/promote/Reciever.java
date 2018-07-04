@@ -9,7 +9,7 @@ public class Reciever {
 	public void onChat(String message) {
 		if (message == null) return;
 		if (!Common.checkHousing()) {
-			Utiles.debug("AutoPromoteMessage: No onForce; Exit");
+			Utiles.debug("AutoPromoteMessage: Not in housing; Exit");
 			return;
 		}
 		Utiles.debug("seeing if any promote available");
@@ -60,16 +60,22 @@ public class Reciever {
 			String name = words[0];
 			if (words[0].contains("[")) name = words[1]; // It means the player has rank
 			String level = null;
+			String messageS = "/cha GG {user}, you should now receive {rank} automatically.";
+			messageS = messageS.replace("{user}", name);
 
 			if (!ap_jn.toLowerCase().equals("off") && message.contains("entered the world")) {
 				reason = "JoinTheWorld";
 				level = ap_jn;
+				messageS = messageS.replace("{rank}", level);
+
 			} else if (!ap_pk.toLowerCase().equals("off") && message.contains("completed the parkour in")) {
-				reason = "FinishedTheParkour";
+				reason = "FinishingTheParkour";
 				level = ap_pk;
+				messageS = messageS.replace("{rank}", level);
 			}
 
 			if (reason != null && level != null) {
+				Common.commandHandler.sendFast(messageS);
 				Message.showMessage("Promoting '" + name + "' to " + level + " for " + reason);
 				for (String cmd : CmdGenAutoPromote(name, level)) {
 					Common.commandHandler.sendSlow(cmd);
@@ -77,7 +83,7 @@ public class Reciever {
 				return true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Utiles.debug(e);
 			Utiles.debug("fromServer->Message crashed with an exception!");
 		}
 		return false;

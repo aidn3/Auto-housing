@@ -1,33 +1,22 @@
 package com.aidn5.autohousing.main;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
 import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
 
-public class Manager {
-	private boolean API_Searcher = false;
-	private HashMap<String, String> people_data;
-
-	public void start() {
-		// String api_key = Common.main_settings.get("api_key", "");
-		// if (api_key.isEmpty()) SendAPIrequest();
-		people_data = new HashMap();
-	}
-
-	/*
-	 * public void onChat(ClientChatReceivedEvent event) { String API =
-	 * filterAPI(event); if (API != null) { Common.main_settings.get("api_key",
-	 * event.message.getUnformattedTextForChat()); if (API_Searcher) { API_Searcher
-	 * = false; if (event.isCancelable()) event.setCanceled(true); } } }
-	 */
+public class Reciever {
+	public static List<Pattern> apiPattern;
 
 	public void onChat(String message) {
 		if (Message.LegitMsg(message)) {
 			Utiles.debug("Message is legit");
 			checkHubMsg(message);
+			checkAPI(message);
 		} else {
 			Utiles.debug("Message is NOT legit");
 		}
@@ -79,12 +68,16 @@ public class Manager {
 		return false;
 	}
 
-	public void SendAPIrequest() {
-		API_Searcher = true;
-		Common.commandHandler.sendFast("/api");
-	}
+	public void checkAPI(String message) {
+		if (apiPattern == null) return;
 
-	public String filterAPI(String event) {
-		return null;
+		for (Pattern pattern : apiPattern) {
+			Matcher matcher = pattern.matcher(message);
+			if (matcher.find()) {
+				Common.main_settings.set("api", matcher.group(1));
+				Utiles.debug("API FOUND: " + matcher.group(1));
+				return;
+			}
+		}
 	}
 }

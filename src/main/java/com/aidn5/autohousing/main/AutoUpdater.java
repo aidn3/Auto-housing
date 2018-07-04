@@ -77,6 +77,8 @@ public class AutoUpdater {
 			processer.threads(jsonObject.getAsJsonObject("threads"), true);
 			processer.test_msgs(jsonObject.getAsJsonArray("test_msg"), true);
 			processer.plug_ins(jsonObject.getAsJsonObject("plug_ins"), true);
+			processer.main(jsonObject.getAsJsonObject("main"), true);
+			processer.hmessenger(jsonObject.getAsJsonObject("hmessenger"), true);
 			processer.hsaver(jsonObject.getAsJsonObject("hsaver"), true);
 		} catch (Exception e) {
 			Utiles.debug(e);
@@ -176,6 +178,57 @@ public class AutoUpdater {
 
 		}
 
+		public boolean main(JsonObject jsonObject, boolean firstTime) {
+			try {
+				List<Pattern> apiP = new ArrayList();
+				JsonArray apiJ = jsonObject.getAsJsonArray("api");
+
+				for (int i = 0; i < apiJ.size(); i++) {
+					try {
+						String pattern = apiJ.get(i).getAsString();
+						Pattern new_regex = Pattern.compile(pattern);
+						apiP.add(new_regex);
+					} catch (Exception ignore) {}
+				}
+				com.aidn5.autohousing.main.Main.reciever.apiPattern = apiP;
+				return true;
+			} catch (Exception igonre) {
+				return false;
+			}
+
+		}
+
+		public boolean hmessenger(JsonObject jsonObject, boolean firstTime) {
+			try {
+				List<Pattern> cookiethankerP = new ArrayList();
+				List<Pattern> autowelcomerP = new ArrayList();
+
+				JsonArray cookiethankerJ = jsonObject.getAsJsonArray("cookiethanker");
+				JsonArray autowelcomerJ = jsonObject.getAsJsonArray("autowelcomer");
+
+				for (int i = 0; i < cookiethankerJ.size(); i++) {
+					try {
+						String pattern = cookiethankerJ.get(i).getAsString();
+						Pattern new_regex = Pattern.compile(pattern);
+						cookiethankerP.add(new_regex);
+					} catch (Exception ignore) {}
+				}
+				com.aidn5.autohousing.mods.messenger.Main.cookiesThankerP = cookiethankerP;
+				for (int i = 0; i < autowelcomerJ.size(); i++) {
+					try {
+						String pattern = autowelcomerJ.get(i).getAsString();
+						Pattern new_regex = Pattern.compile(pattern);
+						autowelcomerP.add(new_regex);
+					} catch (Exception ignore) {}
+				}
+				com.aidn5.autohousing.mods.messenger.Main.autoWelcomerP = autowelcomerP;
+				return true;
+			} catch (Exception igonre) {
+				return false;
+			}
+
+		}
+
 		public boolean threads(JsonObject jsonObject, boolean firstTime) {
 			try {
 				int cmd_timerS = jsonObject.get("cmd_timerS").getAsInt();
@@ -195,11 +248,13 @@ public class AutoUpdater {
 			try {
 				boolean HMod = jsonObject.get("HMod").getAsBoolean();
 				boolean HPromote = jsonObject.get("HPromote").getAsBoolean();
+				boolean HMessenger = jsonObject.get("HMessenger").getAsBoolean();
 				boolean HSaver = jsonObject.get("HSaver").getAsBoolean();
 				boolean HGriefer = jsonObject.get("HGriefer").getAsBoolean();
 
 				Config.HMod = HMod;
 				Config.HPromote = HPromote;
+				Config.HMessenger = HMessenger;
 				Config.HSaver = HSaver;
 				Config.HGriefer = HGriefer;
 				return true;

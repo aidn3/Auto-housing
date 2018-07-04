@@ -13,22 +13,27 @@ public class Reciever {
 
 	public void onChat(String message) {
 		if (message == null) return;
-		if (!Common.onForce) {
-			if (!Common.main_settings.get("hsaver-reminder-toggled", "ON").equals("ON")) {
-				Utiles.debug("hsaver: No onForce; Exit");
-				return;
-			}
+		if (!Common.checkHousing()) {
+			Utiles.debug("hsaver: Not in housing; Exit");
+			return;
 		}
+		if (!Common.main_settings.get("hsaver-toggled", "ON").equals("ON")) {
+			Utiles.debug("hsaver: No onForce; feature not enbaled in settings; Exit");
+			return;
+		}
+
 		Utiles.debug("Hsaver: checking it...");
 		if (Message.LegitMsg(message)) {
 
 		} else {
 			locationSaver(message);
+			// saveRules(message);
 		}
 	}
 
 	private boolean locationSaver(String message) {
 		try {
+			if (message.contains("!save") || message.contains("From")) ;
 			for (Pattern pattern : Main.regex_detector) {
 				Matcher matcher = pattern.matcher(message);
 				if (matcher.find()) {
@@ -59,6 +64,7 @@ public class Reciever {
 			}
 		} catch (Exception e) {
 			Utiles.debug("ERROR-Hsaver-onChat-Exception: message was: " + message);
+			Utiles.debug(e);
 		}
 		return false;
 	}

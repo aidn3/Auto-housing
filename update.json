@@ -2,11 +2,11 @@
 "msg_detector":{
     "OnHousingStr":["Welcome to the Housing"," entered the world"],
     "OnNotHousingStr":["Sending you to"],
-    "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb","isconnect occured in your connection, so you were put in the Housing Lobb"]
+    "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
 },
 "mod_config":{
     "config_url":["http:\/\/bit.ly\/asd"],"reg_url":["htp:\/\/bit.ly\/asdasd"],
-    "version":"0.4.1"
+    "version":"0.5.0"
 },
 "threads":{
     "cmd_timerS":5000,
@@ -16,11 +16,19 @@
 "plug_ins":{
     "HMod":true,
     "HPromote":true,
+    "HMessenger":true,
     "HSaver":true,
     "HGriefer":false
 },
+"main":{
+    "api":["Your new API key is ([A-Za-z0-9\\-]{36})"]
+},
 "hsaver":{
-    "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)$"]
+    "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)"]
+},
+"hmessenger":{
+    "cookiethanker":["You received ([0-9]|[0-9][0-9]) cookie from (([A-Za-z0-9_]{1,32}))"],
+    "autowelcomer":["([A-Za-z0-9_]{1,32}) entered the world"]
 },
 "test_msg":
     [
@@ -37,8 +45,9 @@
         "\u00a79Party > \u00a77aidn5\u00a7f: ouch",
         "Ema19226: ty",
         "Your api is 1234-6f1d-5tg1-fg42-23rf",
+        "Your new API key is c54c23f8-b4dc-4323-9407-5dba55bd2d86",
         "To [VIP] SrryDude: didnt change it at all :P",
         "An exception occurred in your connection, sadd asd w deadwef qwef",
-	"HAAAAA TEST"
+        "You received 1 cookie from nds06!"
     ]
 }
