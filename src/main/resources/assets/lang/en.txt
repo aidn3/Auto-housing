@@ -13,4 +13,5 @@ OFF = off
 THREAD_ERR = -ERROR: can't keep up! You can try to run it again if you want...
 
 REMIND_SAVE = Don't forget to save your location every while!
+REMIND_COOKIE = Don't forget to give us a cookie :D
 

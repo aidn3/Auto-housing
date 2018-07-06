@@ -29,8 +29,11 @@ public class Message {
 		ChatStyle style = new ChatStyle();
 		style.setColor(EnumChatFormatting.YELLOW);
 		component.setChatStyle(style);
-
-		Common.mc.thePlayer.addChatMessage(component);
+		try {
+			Common.mc.thePlayer.addChatMessage(component);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@Deprecated

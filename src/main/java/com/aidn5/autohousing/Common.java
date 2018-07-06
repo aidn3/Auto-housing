@@ -7,6 +7,7 @@ import com.aidn5.autohousing.services.SettingsHandler;
 import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class Common {
 	// Mod status
@@ -50,5 +51,19 @@ public class Common {
 			}
 		}
 		return true;
+	}
+
+	public static boolean masterIsOwner() {
+		EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(master);
+		if (player == null) {
+			Utiles.debug("Master is not here... :/");
+			return false;
+		}
+		Utiles.debug("Player Tag IS: " + player.getCustomNameTag());
+		if (player.getCustomNameTag().toLowerCase().contains("[owner]")) {
+			Utiles.debug("Player is the OWNER!");
+			return true;
+		}
+		return false;
 	}
 }
