@@ -32,6 +32,7 @@ public class Reciever {
 		for (Pattern pattern : Main.autoWelcomerP) {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.find()) {
+				if (matcher.group(1).equals(Common.master)) return;
 				String string = "Welcome {user} ^_^";
 
 				string = string.replace("{user}", matcher.group(1));

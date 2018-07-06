@@ -14,7 +14,7 @@ public class Main {
 	public static List<Pattern> regex_detector;
 	static SettingsHandler settings;
 	static Reciever reciever;
-	static Reminder reminder;
+	static Thread_ reminder;
 	static boolean started = false;
 
 	static public void start() {
@@ -25,7 +25,7 @@ public class Main {
 		if (started) return;
 
 		settings = new SettingsHandler("housingSaver");
-		reminder = new Reminder();
+		reminder = new Thread_();
 		reciever = new Reciever();
 
 		String[] commands = new String[] { "hsaver", "hs" };
@@ -39,7 +39,7 @@ public class Main {
 			started = false;
 
 			settings = new SettingsHandler("housingSaver");
-			reminder = new Reminder();
+			reminder = new Thread_();
 			reciever = new Reciever();
 
 			started = true;

@@ -29,7 +29,7 @@ public class Command extends CommandBase {
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		try {
 			// Warn the user about saving data
-			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
+			if (!Common.main_settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
 
 			// length will get requested many times in the code; better performence
 			int length = args.length;
@@ -54,9 +54,13 @@ public class Command extends CommandBase {
 
 			if (args[0].toLowerCase().equals("status")) {
 				showMessage(primary + "AutoPromote: ", sender);
-				showMessage(primary + "All: " + secondary + Main.settings.get("ap-jn", "OFF"), sender);
-				showMessage(primary + "Friends: " + secondary + Main.settings.get("ap-fr", "OFF"), sender);
-				showMessage(primary + "Parkour: " + secondary + Main.settings.get("ap-pk", "OFF"), sender);
+				showMessage(primary + "All: " + secondary + Common.main_settings.get("hpromote-all", "OFF"), sender);
+				showMessage(primary + "Parkour: " + secondary + Common.main_settings.get("hpromote-parkour", "OFF"),
+						sender);
+				showMessage(primary + "Friends: " + secondary + Common.main_settings.get("hpromote-friends", "OFF"),
+						sender);
+				showMessage(primary + "Cookies: " + secondary + Common.main_settings.get("hpromote-cookies", "OFF"),
+						sender);
 				return;
 			}
 		} catch (Exception e) {

@@ -1,5 +1,8 @@
 package com.aidn5.autohousing.mods.promote;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
@@ -7,90 +10,136 @@ import com.aidn5.autohousing.utiles.Utiles;
 public class Reciever {
 
 	public void onChat(String message) {
-		if (message == null) return;
+		if (message == null || message.isEmpty()) return;
 		if (!Common.checkHousing()) {
 			Utiles.debug("AutoPromoteMessage: Not in housing; Exit");
 			return;
 		}
 		Utiles.debug("seeing if any promote available");
 		if (Message.LegitMsg(message)) {
-			fromServer(message);
+			allPromote(message);
+			parkourPromote(message);
+			friendsPromote(message);
+			cookiesPromote(message);
 		} else {
-			fromPlayer(message);
+
 		}
 	}
 
-	// Part where the message should from player
-	// For things from the player/chat
-	public boolean fromPlayer(String message) {
-		try {
-			/*
-			 * String ap_fw = Main.settings.get("ap-fw", "OFF");
-			 * 
-			 * String reason = null; String name = Message.getUsername(message);
-			 * 
-			 * String level = null;
-			 * 
-			 * if (!ap_fw.equals("OFF") && message.contains(Main.settings.get("ap-fw-word",
-			 * "PromoteME!"))) { reason = "WordSaid"; level = ap_fw; }
-			 * 
-			 * Utiles.debug("seeing if any promote available"); if (reason != null && level
-			 * != null) { Message.showMessage("Promoting '" + name + "' to " + level +
-			 * " for " + reason); for (String cmd : CmdGenAutoPromote(name, level)) {
-			 * Utiles.debug("EXECUTING: " + cmd); Common.commandHandler.sendSlow(cmd); }
-			 * return true; }
-			 */
-		} catch (Exception e) {
-			e.printStackTrace();
-			Utiles.debug("fromPlayer->Message crashed with an exception!");
-		}
-		return false;
-	}
+	private void allPromote(String message) {
+		if (Main.allP == null) return;
 
-	// Part where the message should from the server
-	// For things from the server
-	public boolean fromServer(String message) {
-		try {
-			String[] words = message.split("\\s+");
-			String ap_pk = Main.settings.get("ap-pk", "OFF");
-			String ap_jn = Main.settings.get("ap-jn", "OFF");
-			Main.settings.get("ap-fw", "OFF");
+		String settingsS = Common.main_settings.get("hpromote-all", "OFF");
+		if (settingsS.toLowerCase().contains("off")) return;
 
-			String reason = null;
-			String name = words[0];
-			if (words[0].contains("[")) name = words[1]; // It means the player has rank
-			String level = null;
-			String messageS = "/cha GG {user}, you should now receive {rank} automatically.";
-			messageS = messageS.replace("{user}", name);
+		String messageS = Common.main_settings.get("hpromote-all-msg", "");
+		if (messageS == null) messageS = "";
+		// String string = "Welcome {user} ^_^";
 
-			if (!ap_jn.toLowerCase().equals("off") && message.contains("entered the world")) {
-				reason = "JoinTheWorld";
-				level = ap_jn;
-				messageS = messageS.replace("{rank}", level);
+		for (Pattern pattern : Main.allP) {
+			Matcher matcher = pattern.matcher(message);
+			if (matcher.find()) {
+				String name = matcher.group(1);
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				if (!messageS.isEmpty()) {
+					messageS = messageS.replace("{user}", matcher.group(1));
+					messageS = Message.stringChanger(messageS);
 
-			} else if (!ap_pk.toLowerCase().equals("off") && message.contains("completed the parkour in")) {
-				reason = "FinishingTheParkour";
-				level = ap_pk;
-				messageS = messageS.replace("{rank}", level);
-			}
-
-			if (reason != null && level != null) {
-				Common.commandHandler.sendFast(messageS);
-				Message.showMessage("Promoting '" + name + "' to " + level + " for " + reason);
-				for (String cmd : CmdGenAutoPromote(name, level)) {
-					Common.commandHandler.sendSlow(cmd);
+					Common.commandHandler.sendFast(Message.stringChanger(messageS));
 				}
-				return true;
+				promote(name, settingsS);
+				return;
 			}
-		} catch (Exception e) {
-			Utiles.debug(e);
-			Utiles.debug("fromServer->Message crashed with an exception!");
 		}
-		return false;
 	}
 
-	public String[] CmdGenAutoPromote(String name, String permission) {
+	private void parkourPromote(String message) {
+		if (Main.parkourP == null) return;
+
+		String settingsS = Common.main_settings.get("hpromote-parkour", "OFF");
+		if (settingsS.toLowerCase().contains("off")) return;
+
+		String messageS = Common.main_settings.get("hpromote-parkour-msg", "OFF");
+		if (messageS == null) messageS = "";
+		// String string = "Welcome {user} ^_^";
+
+		for (Pattern pattern : Main.parkourP) {
+			Matcher matcher = pattern.matcher(message);
+			if (matcher.find()) {
+				String name = matcher.group(1);
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				if (!messageS.isEmpty()) {
+					messageS = messageS.replace("{user}", matcher.group(1));
+					messageS = Message.stringChanger(messageS);
+
+					Common.commandHandler.sendFast(Message.stringChanger(messageS));
+				}
+				promote(name, settingsS);
+				return;
+			}
+		}
+	}
+
+	private void friendsPromote(String message) {
+		if (Main.friendsP == null) return;
+
+		String settingsS = Common.main_settings.get("hpromote-friends", "OFF");
+		if (settingsS.toLowerCase().contains("off")) return;
+
+		String messageS = Common.main_settings.get("hpromote-friends-msg", "OFF");
+		if (messageS == null) messageS = "";
+		// String string = "Welcome {user} ^_^";
+
+		for (Pattern pattern : Main.friendsP) {
+			Matcher matcher = pattern.matcher(message);
+			if (matcher.find()) {
+				String name = matcher.group(1);
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				if (!messageS.isEmpty()) {
+					messageS = messageS.replace("{user}", matcher.group(1));
+					messageS = Message.stringChanger(messageS);
+
+					Common.commandHandler.sendFast(Message.stringChanger(messageS));
+				}
+				promote(name, settingsS);
+				return;
+			}
+		}
+	}
+
+	private void cookiesPromote(String message) {
+		if (Main.cookiesP == null) return;
+
+		String settingsS = Common.main_settings.get("hpromote-cookies", "OFF");
+		if (settingsS.toLowerCase().contains("off")) return;
+
+		String messageS = Common.main_settings.get("hpromote-cookies-msg", "");
+		if (messageS == null) messageS = "";
+		// String string = "Welcome {user} ^_^";
+
+		for (Pattern pattern : Main.cookiesP) {
+			Matcher matcher = pattern.matcher(message);
+			if (matcher.find()) {
+				String name = matcher.group(2);
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for giving cookie!");
+				if (!messageS.isEmpty()) {
+					messageS = messageS.replace("{user}", matcher.group(1));
+					messageS = Message.stringChanger(messageS);
+
+					Common.commandHandler.sendFast(Message.stringChanger(messageS));
+				}
+				promote(name, settingsS);
+				return;
+			}
+		}
+	}
+
+	public void promote(String name, String permission) {
 		// Give the abiltiy to play with the commands; not hardcoded
-		return new String[] { "/group " + permission + " add " + name };
+		String[] commands = new String[] { "/group " + permission + " add " + name };
+
+		for (String cmd : commands) {
+			Common.commandHandler.sendSlow(cmd);
+		}
 	}
 }

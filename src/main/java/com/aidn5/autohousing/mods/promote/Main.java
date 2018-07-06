@@ -1,14 +1,20 @@
 package com.aidn5.autohousing.mods.promote;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
-import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 
 public class Main {
-	static SettingsHandler settings;
+	public static List<Pattern> allP;
+	public static List<Pattern> parkourP;
+	public static List<Pattern> friendsP;
+	public static List<Pattern> cookiesP;
+
 	static Reciever reciever;
 	static boolean started = false;
 
@@ -20,7 +26,6 @@ public class Main {
 		if (started) return;
 
 		reciever = new Reciever();
-		settings = new SettingsHandler("promote");
 		String[] commands = new String[] { "hpromote", "hp" };
 		ClientCommandHandler.instance.registerCommand(new Command(commands));
 

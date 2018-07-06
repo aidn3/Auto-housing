@@ -29,9 +29,9 @@ public class Command extends CommandBase {
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		try {
 			// Warn the user about saving data
-			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
-
-			// length will get requested many time in the code; better performence
+			if (!Common.main_settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
+			Common.masterIsOwner();
+			// length will get requested many time in the code; better performance
 			int length = args.length;
 			String[] orginArgs = args.clone();
 
@@ -54,7 +54,21 @@ public class Command extends CommandBase {
 			}
 
 			for (int i = 0; i < length; i++) {
-				args[i] = args[i].toLowerCase(); // make it "unvirsal"
+				args[i] = args[i].toLowerCase(); // make it "universal"
+			}
+
+			if (args[0].equals("cookies")) {
+				if (args[1].equals("reminder")) {
+					int timer = Integer.valueOf(args[2]);
+					if (timer < 1) throw new Exception("");
+					if (!Common.main_settings.set("hmsg-cookiesReminder-timer", String.valueOf(timer))) {
+						showError(Common.language.get("SET_SAVE_ERR", ""), sender);
+						return;
+					}
+					showMessage(getCommandName() + "-CookiesReminder will send message every " + timer + " minute(s)",
+							sender);
+					return;
+				}
 			}
 		} catch (Exception e) {
 			Utiles.debug(e);
@@ -83,7 +97,16 @@ public class Command extends CommandBase {
 		int length = args.length;
 		List<String> list = new ArrayList();
 
+		if (length == 1) {
+			list.add("cookies");
+		} else if (length == 2) {
+			if (args[0].equals("cookies")) {
+				list.add("reminder");
+			}
+		}
+
 		return list;
+
 	}
 
 	@Override
@@ -113,7 +136,12 @@ public class Command extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return null;
+		String CMD_NAME = "/" + getCommandName() + " ";
+		showMessage(neutral + "--------------------", sender);
+		showMessage(secondary + Config.MOD_NAME, sender);
+		showMessage(primary + CMD_NAME + "cookies reminder <time (in minutes)>", sender);
+
+		return "";
 	}
 
 }

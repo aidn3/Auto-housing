@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
-import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -14,8 +13,9 @@ public class Main {
 	public static List<Pattern> cookiesThankerP;
 	public static List<Pattern> autoWelcomerP;
 
-	static SettingsHandler settings;
 	static Reciever reciever;
+	static Thread_ reminder;
+
 	static boolean started = false;
 
 	static public void start() {
@@ -26,7 +26,8 @@ public class Main {
 		if (started) return;
 
 		reciever = new Reciever();
-		settings = new SettingsHandler("hmessenger");
+		reminder = new Thread_();
+
 		String[] commands = new String[] { "hmessenger", "hm" };
 		ClientCommandHandler.instance.registerCommand(new Command(commands));
 
