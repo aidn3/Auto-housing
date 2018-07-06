@@ -26,8 +26,8 @@ public class Main {
 		Common.commandHandler = new CommandHandler();
 		reciever = new Reciever();
 
-		Common.autoUpdater.Update(true); // Load settings on offline mode
-		Common.autoUpdater.Update(false); // Try to load settings from the server
+		Common.autoUpdater.Update(false); // Load settings on offline mode
+		Common.autoUpdater.Update(true); // Try to load settings from the server
 		if (!Config.HMod) { // Mod not allowed to work
 			MinecraftForge.EVENT_BUS.unregister(EventListener.class);
 			return;
@@ -54,6 +54,12 @@ public class Main {
 		// Full test for commands
 		// FullTest();
 	};
+
+	static public void checkUpdate() {
+		if (Config.NEW_VERSION != 0) {
+			Message.showMessage(Config.MOD_NAME + ": New Version is available to download!");
+		}
+	}
 
 	static public void FullTest() {
 		// API getter

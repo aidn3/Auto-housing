@@ -10,9 +10,9 @@ public class Config {
 	public static int refresh_Speed = 100;
 
 	public static int NEW_VERSION = 0;
-	public static String URL_UPDATER = "https://raw.githubusercontent.com/aidn3/Auto-housing/master/update.json";
 	// public static String URL_UPDATER =
-	// "http://localhost/service/mod-auto-housing/update.json";
+	// "https://raw.githubusercontent.com/aidn3/Auto-housing/master/update.json";
+	public static String URL_UPDATER = "http://localhost/service/mod-auto-housing/update.json";
 
 	// Activated plug-ins
 	public static boolean HMod = true;

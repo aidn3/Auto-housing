@@ -28,6 +28,7 @@ public class Reciever {
 
 	private boolean checkHubMsg(String message) {
 		for (String possible : Config.OnHousingStr) {
+
 			if (message.contains(possible)) {
 				Common.onHousing = true;
 				return true;

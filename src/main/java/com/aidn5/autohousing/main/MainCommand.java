@@ -67,7 +67,7 @@ public class MainCommand extends CommandBase {
 				return;
 			} else if (args[0].equals("update")) {
 				showMessage(getCommandName() + " Updating the settings to the latest...", sender);
-				Common.autoUpdater.Update(false);
+				Common.autoUpdater.Update(true);
 
 				return;
 			} else if (args[0].equals("status")) {
