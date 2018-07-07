@@ -16,14 +16,10 @@ public class Reciever {
 			return;
 		}
 		Utiles.debug("seeing if any promote available");
-		if (Message.LegitMsg(message)) {
-			allPromote(message);
-			parkourPromote(message);
-			friendsPromote(message);
-			cookiesPromote(message);
-		} else {
-
-		}
+		allPromote(message);
+		parkourPromote(message);
+		friendsPromote(message);
+		cookiesPromote(message);
 	}
 
 	private void allPromote(String message) {

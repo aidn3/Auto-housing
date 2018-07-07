@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.aidn5.autohousing.Common;
-import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,12 +22,8 @@ public class Reciever {
 		}
 
 		Utiles.debug("Hsaver: checking it...");
-		if (Message.LegitMsg(message)) {
+		locationSaver(message);
 
-		} else {
-			locationSaver(message);
-			// saveRules(message);
-		}
 	}
 
 	private boolean locationSaver(String message) {

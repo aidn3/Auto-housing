@@ -16,12 +16,9 @@ public class Reciever {
 			return;
 		}
 		Utiles.debug("HMesseger: checking it...");
-		if (Message.LegitMsg(message)) {
-			autoWelcome(message);
-			cookiesThanker(message);
-		} else {
 
-		}
+		autoWelcome(message);
+		cookiesThanker(message);
 	}
 
 	private void autoWelcome(String message) {
