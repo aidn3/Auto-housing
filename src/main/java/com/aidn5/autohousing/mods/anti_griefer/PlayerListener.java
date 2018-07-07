@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.utiles.Utiles;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PlayerListener {
@@ -27,7 +28,7 @@ public class PlayerListener {
 		List<String> playersInRange = new ArrayList();
 
 		if (Main.performence == 3) {
-			List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
+			List<EntityPlayer> players = Minecraft.getMinecraft().theWorld.playerEntities;
 
 			for (EntityPlayer entityPlayer : players) {
 				if (Utiles.Distance3D(x, y, z, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ) <= range) {
