@@ -3,7 +3,7 @@ package com.aidn5.autohousing;
 public class Config {
 
 	// Mod settings
-	public static boolean debug_mode = false;
+	public static boolean debug_mode = true;
 
 	public static int cmd_timerS = 5000;
 	public static int cmd_timerF = 2000;
@@ -19,7 +19,7 @@ public class Config {
 	public static boolean HMessenger = true;
 	public static boolean HPromote = true;
 	public static boolean HSaver = true;
-	public static boolean HGriefer = false;
+	public static boolean HGriefer = true;
 
 	// Mod variables
 	public static String[] OnHousingStr = new String[] { "Welcome to the Housing", " entered the world" };

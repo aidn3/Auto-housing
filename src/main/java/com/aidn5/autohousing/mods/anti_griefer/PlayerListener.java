@@ -25,9 +25,10 @@ public class PlayerListener {
 	}
 
 	public List<String> getPlayersInRange(int range, double x, double y, double z) {
+		int performence = Integer.parseInt(Common.main_settings.get("ag-performance", "3"));
 		List<String> playersInRange = new ArrayList();
 
-		if (Main.performence == 3) {
+		if (performence == 3) {
 			List<EntityPlayer> players = Minecraft.getMinecraft().theWorld.playerEntities;
 
 			for (EntityPlayer entityPlayer : players) {
@@ -36,7 +37,7 @@ public class PlayerListener {
 				}
 			}
 
-		} else if (Main.performence == 2) {
+		} else if (performence == 2) {
 			if (playersPos == null || playersPos.isEmpty()) return new ArrayList();
 
 			HashMap<String, double[]> playersPos1 = (HashMap<String, double[]>) playersPos.clone();
@@ -65,7 +66,7 @@ public class PlayerListener {
 		try {
 			while (true) {
 				Thread.sleep(1000);
-				if (Main.performence == 2) {
+				if (Integer.parseInt(Common.main_settings.get("ag-performance", "3")) == 2) {
 					HashMap<String, double[]> playersPos1 = new HashMap();
 					List<EntityPlayer> players = Common.mc.theWorld.playerEntities;
 

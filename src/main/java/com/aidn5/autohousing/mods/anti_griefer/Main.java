@@ -1,7 +1,6 @@
 package com.aidn5.autohousing.mods.anti_griefer;
 
 import com.aidn5.autohousing.Common;
-import com.aidn5.autohousing.services.SettingsHandler;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -9,13 +8,11 @@ import net.minecraftforge.client.event.ClientChatReceivedEvent;
 public class Main {
 	static String MOD_NAME = "Anti-Griefer";
 
-	static SettingsHandler settings;
 	static ChatListener chatListener;
 	static PlayerListener playerListener;
-	static BlockRowListener blockRowListener;
+	static public BlockRowListener blockRowListener;
 
 	static boolean started = false;
-	static int performence = 3;
 
 	static public void start() {
 		prepare();
@@ -24,7 +21,6 @@ public class Main {
 	static void prepare() {
 		if (started) return;
 
-		settings = new SettingsHandler("promote");
 		chatListener = new ChatListener();
 		playerListener = new PlayerListener();
 		blockRowListener = new BlockRowListener();

@@ -23,7 +23,7 @@ public class ChatListener {
 	public void onChat(String message) {
 		// Check if it's disabled
 		if (SayNumber == 0) return;
-		if (Main.settings.get("chat_listener", "OFF").equals("OFF")) return;
+		if (Common.main_settings.get("ag-cl", "OFF").equals("OFF")) return;
 
 		Utiles.debug("Anti-Griefer-ChatListener: checking this message...");
 		if (!Message.LegitMsg(message)) {

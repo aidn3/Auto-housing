@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
+import com.aidn5.autohousing.mods.anti_griefer.gui.MainGui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
@@ -29,7 +30,7 @@ public class Command extends CommandBase {
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		try {
 			// Warn the user about saving data
-			if (!Main.settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
+			if (!Common.main_settings.DIR_CHECKED) showMessage(Common.language.get("warning_settings", ""), sender);
 
 			// length will get requested many time in the code; better performence
 			int length = args.length;
@@ -73,9 +74,9 @@ public class Command extends CommandBase {
 
 	private void viewStatus(ICommandSender sender) {
 		showMessage(primary + Main.MOD_NAME + ": ", sender);
-		showMessage(primary + "ChatListener: " + secondary + Main.settings.get("chat_listener", "OFF"), sender);
-		showMessage(primary + "BlocksListener: " + secondary + Main.settings.get("blocks_listener", "OFF"), sender);
-		showMessage(primary + "PlayerListener: " + secondary + Main.settings.get("player_listener", "OFF"), sender);
+		showMessage(primary + "BlocksListener: " + secondary + Common.main_settings.get("ag-bl", "OFF"), sender);
+		showMessage(primary + "WaterListener: " + secondary + Common.main_settings.get("ag-wl", "OFF"), sender);
+		showMessage(primary + "ChatListener: " + secondary + Common.main_settings.get("ag-cl", "OFF"), sender);
 	}
 
 	@Override
