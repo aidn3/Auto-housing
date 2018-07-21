@@ -36,7 +36,7 @@ public class Reciever {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.find()) {
 				String name = matcher.group(1);
-				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining");
 				if (!messageS.isEmpty()) {
 					messageS = messageS.replace("{user}", matcher.group(1));
 					messageS = Message.stringChanger(messageS);
@@ -63,7 +63,7 @@ public class Reciever {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.find()) {
 				String name = matcher.group(1);
-				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for parkour");
 				if (!messageS.isEmpty()) {
 					messageS = messageS.replace("{user}", matcher.group(1));
 					messageS = Message.stringChanger(messageS);
@@ -90,7 +90,7 @@ public class Reciever {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.find()) {
 				String name = matcher.group(1);
-				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for joining (all)");
+				Message.showMessage("Promoting '" + name + "' to " + settingsS + " for beingFrirnd");
 				if (!messageS.isEmpty()) {
 					messageS = messageS.replace("{user}", matcher.group(1));
 					messageS = Message.stringChanger(messageS);
