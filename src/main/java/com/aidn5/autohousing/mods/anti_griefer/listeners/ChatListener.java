@@ -1,9 +1,10 @@
-package com.aidn5.autohousing.mods.anti_griefer;
+package com.aidn5.autohousing.mods.anti_griefer.listeners;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import com.aidn5.autohousing.Common;
+import com.aidn5.autohousing.mods.anti_griefer.Main;
 import com.aidn5.autohousing.utiles.Message;
 import com.aidn5.autohousing.utiles.Utiles;
 
@@ -17,7 +18,7 @@ public class ChatListener {
 	}
 
 	public void prepare() {
-		griefMessage = new HashMap();
+		griefMessage = new HashMap<String, Integer>();
 	}
 
 	public void onChat(String message) {
@@ -39,7 +40,11 @@ public class ChatListener {
 	}
 
 	private void Check() {
-		for (Entry<String, Integer> entry : griefMessage.entrySet()) {
+		if (griefMessage.size() == 0) return;
+
+		for (Entry<String, Integer> entry : /*
+											 * dadqwd ddddddddddddddddddddddddddddd 111111111111111111111e3sssssadwqd d
+											 */griefMessage.entrySet()) {
 			String key = entry.getKey();
 			Integer value = entry.getValue();
 

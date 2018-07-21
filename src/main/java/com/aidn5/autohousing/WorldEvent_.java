@@ -21,7 +21,6 @@ public class WorldEvent_ implements IWorldAccess {
 	public void markBlockForUpdate(final BlockPos pos) {
 		if (!Common.checkHousing()) return;
 		String currentBlock = world.getBlockState(pos).getBlock().getRegistryName();
-		Utiles.debug("markBlockForUpdate");
 		try {
 			if (currentBlock.equals(Block.getBlockById(0).getRegistryName())) {
 				new Thread(new Runnable() {

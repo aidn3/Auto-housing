@@ -1,11 +1,12 @@
-package com.aidn5.autohousing.mods.anti_griefer;
+package com.aidn5.autohousing.mods.anti_griefer.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.aidn5.autohousing.Common;
 import com.aidn5.autohousing.Config;
-import com.aidn5.autohousing.mods.anti_griefer.gui.MainGui;
+import com.aidn5.autohousing.mods.anti_griefer.Main;
+import com.aidn5.autohousing.mods.anti_griefer.controller.gui.SettingsGui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
@@ -45,7 +46,7 @@ public class Command extends CommandBase {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						MainGui main = new MainGui(Minecraft.getMinecraft());
+						SettingsGui main = new SettingsGui(Minecraft.getMinecraft());
 						Minecraft.getMinecraft().displayGuiScreen(main);
 
 					}

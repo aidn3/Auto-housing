@@ -1,4 +1,4 @@
-package com.aidn5.autohousing.mods.anti_griefer;
+package com.aidn5.autohousing.mods.anti_griefer.listeners;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class PlayerListener {
 		prepare();
 	}
 
-	public List<String> getPlayersInRange(int range, double x, double y, double z) {
+	public List<String> getPlayersInRange(double range, double x, double y, double z) {
 		int performence = Integer.parseInt(Common.main_settings.get("ag-performance", "3"));
 		List<String> playersInRange = new ArrayList();
 
