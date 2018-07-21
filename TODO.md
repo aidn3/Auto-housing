@@ -2,12 +2,11 @@
 
 #### Mod-Enhance
 - option: to promote friends on joining  
-- Command: Remove all [Rank]
+- HPromote-Command: Remove all [Rank]
 
 #### Core-changing
-- new-mod: Anti-Griefer  
+- Anti-Griefer: Get who put/destroy what block => By player's name, By nearby objects, By Time
 
 #### Cosmetic
-- Msg-option: Remeber players to give cookies
 - Msg: Messages being changeable
 
