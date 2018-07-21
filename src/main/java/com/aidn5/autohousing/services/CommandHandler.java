@@ -74,21 +74,17 @@ public class CommandHandler {
 				try {
 					if (queueN.size() != 0) {
 						Common.sendCommand(queueN.take());
-						Thread.sleep(Config.refresh_Speed);
 
-					} else if (queueF.size() == 0) {
-						if (queueS.size() != 0) {
-							Common.sendCommand(queueS.take());
-							Thread.sleep(Config.cmd_timerS);
-
-						} else {
-							Thread.sleep(Config.refresh_Speed);
-
-						}
-					} else {
+					} else if (queueF.size() != 0) {
 						Common.sendCommand(queueF.take());
 						Thread.sleep(Config.cmd_timerF);
+
+					} else if (queueS.size() != 0) {
+						Common.sendCommand(queueS.take());
+						Thread.sleep(Config.cmd_timerS);
 					}
+
+					Thread.sleep(Config.refresh_Speed);
 				} catch (Exception ignore) {}
 			}
 
