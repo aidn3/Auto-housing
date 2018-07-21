@@ -1,41 +1,34 @@
 {
+"msg_detector":{
+    "OnHousingStr":["Welcome to the Housing"," entered the world"],
+    "OnNotHousingStr":["Sending you to"],
+    "OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
+},
 "mod_config":{
-	"version":"0.5.0",
-	"valid_version":"0.5.0",
-	"threads":{
-	    "cmd_timerS":5000,
-	    "cmd_timerF":2000,
-	    "refresh_Speed":100
-	},
-	"plug_ins":{
-	    "HMod":true,
-	    "HPromote":true,
-	    "HMessenger":true,
-	    "HSaver":true,
-	    "HGriefer":false
-	}
+    "config_url":["http:\/\/bit.ly\/asd"],"reg_url":["htp:\/\/bit.ly\/asdasd"],
+    "version":"0.5.0"
 },
-
+"threads":{
+    "cmd_timerS":5000,
+    "cmd_timerF":2000,
+    "refresh_Speed":100
+},
+"plug_ins":{
+    "HMod":true,
+    "HPromote":true,
+    "HMessenger":true,
+    "HSaver":true,
+    "HGriefer":false
+},
 "main":{
-	"api":["Your new API key is ([A-Za-z0-9\\-]{36})"],
-	"msg_detector":{
-		"OnHousingStr":["Welcome to the Housing"," entered the world"],
-		"OnNotHousingStr":["Sending you to"],
-		"OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
-	}
-},
-"hpromote":{
-	"parkour":[],
-	"friends":[],
-	"all":[],
-	"cookies":[]
+    "api":["Your new API key is ([A-Za-z0-9\\-]{36})"]
 },
 "hsaver":{
-	"regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)"]
+    "regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)"]
 },
 "hmessenger":{
-	"cookiethanker":["You received ([0-9]|[0-9][0-9]) (cookie|cookies) from (([A-Za-z0-9_]{1,32}))"],
-	"autowelcomer":["([A-Za-z0-9_]{1,32}) entered the world"]
+    "cookiethanker":["You received ([0-9]|[0-9][0-9]) (cookie|cookies) from (([A-Za-z0-9_]{1,32}))"],
+    "autowelcomer":["([A-Za-z0-9_]{1,32}) entered the world"]
 },
 "test_msg":
     [
@@ -59,3 +52,4 @@
         "You received 1 cookie from nds06!"
     ]
 }
+
