@@ -25,7 +25,7 @@
 	}
 },
 "hpromote":{
-	"parkour":["^(([A-Za-z0-9_]{1,32})) completed the parkour in 20:22.724!"],
+	"parkour":["^(([A-Za-z0-9_]{1,32})) completed the parkour"],
 	"friends":[],
 	"all":["^(([A-Za-z0-9_]{1,32})) entered the world"],
 	"cookies":["^You received ([0-9]|[0-9][0-9]) (?:cookie|cookies )? from (([A-Za-z0-9_]{1,32}))"]
@@ -56,7 +56,6 @@
         "Your new API key is c54c23f8-b4dc-4323-9407-5dba55bd2d86",
         "To [VIP] SrryDude: didnt change it at all :P",
         "An exception occurred in your connection, sadd asd w deadwef qwef",
-        "You received 1 cookie from nds06!",
-	"test 1"
+        "You received 1 cookie from nds06!"
     ]
 }
