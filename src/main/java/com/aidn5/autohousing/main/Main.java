@@ -37,7 +37,6 @@ public class Main {
 
 		Common.language = new SettingsHandler("assets/lang/en.txt", true);
 		Common.main_settings = new SettingsHandler("Main");
-		Common.friends = new SettingsHandler("friends");
 
 		Common.autoReconnect = Boolean
 				.parseBoolean(Common.main_settings.get("AutoReconnect", String.valueOf(Common.autoReconnect)));

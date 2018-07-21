@@ -31,7 +31,6 @@ public class Common {
 	// Settings/SavesData
 	static public SettingsHandler language; // Where the language saved
 	static public SettingsHandler main_settings; // Main settings ;for the app
-	static public SettingsHandler friends;
 
 	// Send command to the server
 	public static void sendCommand(String command) {
@@ -54,6 +53,7 @@ public class Common {
 	}
 
 	public static boolean masterIsOwner() {
+		if (Common.onForce) return true;
 		EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(master);
 		if (player == null) {
 			Utiles.debug("Master is not here... :/");
