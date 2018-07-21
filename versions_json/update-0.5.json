@@ -1,0 +1,62 @@
+{
+"mod_config":{
+	"version":"0.5.0",
+	"valid_version":"0.5.0",
+	"threads":{
+	    "cmd_timerS":5000,
+	    "cmd_timerF":2000,
+	    "refresh_Speed":100
+	},
+	"plug_ins":{
+	    "HMod":true,
+	    "HPromote":true,
+	    "HMessenger":true,
+	    "HSaver":true,
+	    "HGriefer":true
+	}
+},
+
+"main":{
+	"api":["^Your new API key is ([A-Za-z0-9\\-]{36})"],
+	"msg_detector":{
+		"OnHousingStr":["Welcome to the Housing"," entered the world"],
+		"OnNotHousingStr":["Sending you to"],
+		"OnAutoReconnectStr":["exception occurred in your connection","ouldn't connect you to that server, so you were put in the housing lobb"]
+	}
+},
+"hpromote":{
+	"parkour":["^(([A-Za-z0-9_]{1,32})) completed the parkour in 20:22.724!"],
+	"friends":[],
+	"all":["^(([A-Za-z0-9_]{1,32})) entered the world"],
+	"cookies":["^You received ([0-9]|[0-9][0-9]) (?:cookie|cookies )? from (([A-Za-z0-9_]{1,32}))"]
+},
+"hsaver":{
+	"regex_detector":["^From (?:\\[[A-Z+]*] )?([A-Za-z0-9_]{1,16}): !(?i)save(?-i)"]
+},
+"hmessenger":{
+	"cookiethanker":["^You received ([0-9]|[0-9][0-9]) (?:cookie|cookies )? from (([A-Za-z0-9_]{1,32}))"],
+	"autowelcomer":["^([A-Za-z0-9_]{1,32}) entered the world"]
+},
+"test_msg":
+    [
+        "Starting FullTest() for debuging...","Welcome to the Housing",
+        "HerrmanncamYT completed the parkour in 20:22.724!",
+        "someone entered the world",
+        "aidn3 entered the world",
+        "From [VIP] aidn5: !save",
+	"From [VIP] Dilain: !saVe Me PlZ",
+        "Ema19226: griefer",
+        "[Co-Owner] aidn3: there IS GRIEFER here",
+        "[RES] [VIP] SrryDude: STOP GRIeFing plz",
+        "[Owner] someone: just WHY are YOU GRIEFING",
+        "Ema19226: don't trust UserName he is a GRIEFER!",
+        "\u00a79Party > \u00a77aidn5\u00a7f: ouch",
+        "Ema19226: ty",
+        "Your api is 1234-6f1d-5tg1-fg42-23rf",
+        "Your new API key is c54c23f8-b4dc-4323-9407-5dba55bd2d86",
+        "To [VIP] SrryDude: didnt change it at all :P",
+        "An exception occurred in your connection, sadd asd w deadwef qwef",
+        "You received 1 cookie from nds06!",
+	"test 1"
+    ]
+}
