@@ -1,4 +1,4 @@
-# Changelog
+# Changelog (Simplified)
 
 #### 0.1 (it's name beta-1.0)
 + AutoPromote: onParkour, Join, Certain word said
@@ -44,7 +44,9 @@
 + Check for version updates
 
 #### 0.5.0 (offical)
++ Add "hmessenger" mod
++ Add "Anti-Griefer" mod
 + Fix bugs with commands, GUI, Recievers
 + Upgrade the GUI (TipTool, etc.)
 + added API detector (for futur use)
-+ added "messenger"
+
